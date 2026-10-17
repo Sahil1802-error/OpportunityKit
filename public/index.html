@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="web_standard" name="shell-type">
-  <title>OpportunityKit — Stop Getting Ghosted by Chaotic JDs</title>
-  <meta name="description" content="Turn chaotic 5-page JD pdfs into raw, actionable speedrun checklists. Unknown is never a failure — it's just convertible upside points.">
+  <title>OpportunityKit — The Readiness Runway · Deterministic ATS Decoder</title>
+  <meta name="description" content="Turn chaotic 5-page JD pdfs into raw, actionable speedrun checklists. Know where you stand. Know what to fix. Know if you can make the deadline.">
 
   <!-- Google Fonts: Archivo Black, Space Grotesk, JetBrains Mono & Material Symbols -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -44,7 +44,7 @@
     };
   </script>
 
-  <!-- Neo-Brutalist Stylesheet & Custom Scroll Motion -->
+  <!-- Neo-Brutalist Custom Stylesheet & Motion System -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-paper text-ink font-sans antialiased min-h-screen selection:bg-yellow selection:text-ink">
@@ -52,9 +52,14 @@
   <!-- Top Scroll Progress Line -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Sticky Top Header -->
+  <!-- Accessible Skip Link -->
+  <a href="#simulator-section" class="skip-link">Skip to unified simulator</a>
+
+  <!-- Sticky Header -->
   <header class="sticky top-0 z-50 bg-paper neo-border-thick border-t-0 border-x-0 shadow-hard">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Badge -->
       <div class="flex items-center gap-3">
         <a class="flex items-center gap-2 group" href="#">
           <div class="w-10 h-10 bg-yellow neo-border flex items-center justify-center font-display text-xl shadow-hard-sm group-hover:bg-mint transition-colors">⚡</div>
@@ -67,18 +72,37 @@
         </div>
       </div>
 
-      <nav class="hidden lg:flex items-center gap-3 font-mono font-bold text-xs">
-        <a class="px-3 py-1.5 bg-yellow neo-border shadow-hard-sm hover:bg-white transition-all uppercase" data-path="product-demo" href="#simulator-section">Demo Playground</a>
-        <a class="px-3 py-1.5 hover:bg-lilac neo-border border-transparent hover:border-black transition-all uppercase" data-path="readiness-runway" href="#action-runway-solutions">Runway Engine</a>
-        <a class="px-3 py-1.5 hover:bg-coral-light neo-border border-transparent hover:border-black transition-all uppercase" data-path="fix-ladder" href="#closest-win-section">Speedruns</a>
-        <a class="px-3 py-1.5 hover:bg-mint neo-border border-transparent hover:border-black transition-all uppercase" data-path="pricing" href="#pricing-section">Pricelist</a>
+      <!-- Navigation Links with Smooth Scroll -->
+      <nav class="hidden lg:flex items-center gap-3 font-mono font-bold text-xs" aria-label="Page Sections">
+        <a class="px-3 py-1.5 bg-yellow neo-border shadow-hard-sm hover:bg-white transition-all uppercase" href="#simulator-section">
+          Demo Playground
+        </a>
+        <a class="px-3 py-1.5 hover:bg-lilac neo-border border-transparent hover:border-black transition-all uppercase" href="#action-runway-solutions">
+          Runway Engine
+        </a>
+        <a class="px-3 py-1.5 hover:bg-coral-light neo-border border-transparent hover:border-black transition-all uppercase" href="#closest-win-section">
+          Speedruns
+        </a>
+        <a class="px-3 py-1.5 hover:bg-mint neo-border border-transparent hover:border-black transition-all uppercase" href="#pricing-section">
+          Pricelist
+        </a>
       </nav>
 
-      <div class="flex items-center gap-3">
-        <span class="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs font-black bg-white px-2.5 py-1 neo-border shadow-hard-sm">
-          <span></span>
+      <!-- Right Header Actions: Candidate Profile Drawer & Speedrun CTA -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs font-black bg-white px-2.5 py-1 neo-border shadow-hard-sm" title="India Region Support">
           <span class="text-lg leading-none inline-block drop-shadow-[1px_1px_0px_#000]">🇮🇳</span>
         </span>
+        
+        <button id="btn-open-profile-drawer" class="neo-btn bg-white hover:bg-yellow text-ink font-mono font-black text-xs uppercase px-3 py-2 neo-border flex items-center gap-1.5" title="View or edit candidate profile and SQLite sync">
+          <span class="material-symbols-outlined text-[16px]">account_circle</span>
+          <span class="hidden md:inline">MY PROFILE</span>
+        </button>
+
+        <button id="btn-header-print" class="neo-btn bg-white hover:bg-paper text-ink font-mono font-black text-xs uppercase px-3 py-2 neo-border hidden sm:flex items-center gap-1" title="Print or save as PDF">
+          <span class="material-symbols-outlined text-[16px]">print</span>
+        </button>
+
         <button class="neo-btn bg-coral text-white font-mono font-black text-xs uppercase px-4 py-2 neo-border flex items-center gap-1.5" id="btn-hero-launch">
           <span class="material-symbols-outlined text-[16px]">rocket_launch</span> SPEEDRUN NOW
         </button>
@@ -86,7 +110,7 @@
     </div>
   </header>
 
-  <!-- Main Body Canvas with Pattern Grid -->
+  <!-- Main Content Canvas -->
   <main class="w-full pattern-grid pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col gap-10">
 
@@ -94,11 +118,14 @@
            HERO ZINE SECTION
            =================================================================== -->
       <section class="relative reveal-on-scroll">
+        <!-- Floating Sticker Top-Right -->
         <div class="absolute -top-4 -right-2 md:right-8 z-20 hidden sm:block sticker-tilt-2">
           <div class="bg-lilac neo-border-thick p-3 shadow-hard font-display text-center uppercase leading-none">
             <span class="text-xs font-mono font-bold block mb-1">AUTOMATED ATS AUDIT</span>
             <span class="text-2xl text-white drop-shadow-[2px_2px_0px_#000]">FREE TIER<br>FOREVER</span>
-            <div class="mt-2 bg-yellow px-2 py-0.5 neo-border text-[11px] font-mono text-ink font-black">★ ZERO JUNK APPS ★</div>
+            <div class="mt-2 bg-yellow px-2 py-0.5 neo-border text-[11px] font-mono text-ink font-black">
+              ★ ZERO JUNK APPS ★
+            </div>
           </div>
         </div>
 
@@ -107,18 +134,20 @@
             <span class="material-symbols-outlined text-[16px]">bolt</span> DETERMINISTIC ATS DECODER · NO AI HALLUCINATIONS
           </div>
 
+          <!-- Dynamic Headline with Typewriter -->
           <div class="max-w-5xl">
             <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.12] tracking-tight uppercase">
               <span class="block">STOP GETTING <br>GHOSTED BY</span>
               <span class="inline-flex items-center flex-wrap align-middle mt-2 mb-1">
                 <span class="bg-coral text-white px-3 sm:px-4 py-1 inline-block neo-border shadow-hard sticker-tilt-2 mr-2">
-                  <span class="text-white drop-shadow-[2px_2px_0px_#000]" id="typewriter-text"></span>
+                  <span class="text-white drop-shadow-[2px_2px_0px_#000]" id="typewriter-text">CHAOTIC JDS</span>
                   <span aria-hidden="true" class="typewriter-cursor"></span>
                 </span>
               </span>
             </h1>
           </div>
 
+          <!-- Clear Subhead -->
           <div class="mt-6 pt-1 max-w-4xl">
             <p class="font-sans font-bold text-lg sm:text-2xl text-ink leading-relaxed">
               Turn chaotic 5-page JD pdfs into raw, actionable speedrun checklists.
@@ -127,6 +156,7 @@
             </p>
           </div>
 
+          <!-- Quick Action Buttons & Category Pills -->
           <div class="flex flex-wrap items-center gap-4 mt-8 pt-2">
             <button class="neo-btn bg-yellow font-display text-base uppercase px-6 py-3 neo-border-thick flex items-center gap-2 text-ink" id="btn-load-sample">
               <span class="material-symbols-outlined text-[22px]">smart_toy</span> LOAD B.TECH 2ND/3RD YR SAMPLE
@@ -134,14 +164,15 @@
             <button class="neo-btn bg-white font-mono font-bold text-sm uppercase px-5 py-3 neo-border-thick flex items-center gap-2 hover:bg-paper" id="btn-custom-jd">
               <span class="material-symbols-outlined text-[20px]">content_paste</span> PASTE RAW JD
             </button>
-            <div class="flex items-center gap-1 bg-paper p-1 neo-border shadow-hard-sm">
+            
+            <div class="flex items-center gap-1 bg-paper p-1 neo-border shadow-hard-sm" id="opp-type-group">
               <button class="opp-type-btn active px-3 py-1.5 font-mono text-xs font-bold uppercase bg-ink text-white" data-type="internship">Internship</button>
               <button class="opp-type-btn px-3 py-1.5 font-mono text-xs font-bold uppercase hover:bg-yellow" data-type="scholarship">Scholarship</button>
               <button class="opp-type-btn px-3 py-1.5 font-mono text-xs font-bold uppercase hover:bg-yellow" data-type="competition">Hackathon</button>
             </div>
           </div>
 
-          <!-- Hero Mini HUD Stats -->
+          <!-- Hero Mini HUD Stats (Real Score Bindings) -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t-4 border-black">
             <div class="bg-paper p-3 neo-border shadow-hard-sm">
               <span class="font-mono text-xs font-bold text-ink/70 block uppercase">Current Baseline</span>
@@ -167,15 +198,17 @@
       </section>
 
       <!-- ===================================================================
-           INTERACTIVE NEO-BRUTALIST PLAYGROUND ENGINE (#1 THE LIVE UNIFIED SIMULATOR)
+           SECTION #1: THE LIVE UNIFIED SIMULATOR
            =================================================================== -->
       <section class="flex flex-col gap-8 reveal-on-scroll" id="simulator-section">
+        
+        <!-- Section Header -->
         <div class="flex items-center justify-between flex-wrap gap-4">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 bg-black text-yellow flex items-center justify-center font-display text-xl neo-border">#1</div>
             <h2 class="font-display text-2xl sm:text-3xl uppercase tracking-tight">THE LIVE UNIFIED SIMULATOR</h2>
           </div>
-          <div class="inline-flex items-center gap-2 bg-coral text-white font-mono font-bold text-xs px-3 py-1 neo-border shadow-hard-sm sticker-tilt-2" id="simulator-badge">
+          <div class="inline-flex items-center gap-2 bg-coral text-white font-mono font-bold text-xs px-3 py-1 neo-border shadow-hard-sm sticker-tilt-2" id="simulator-target-badge">
             🔥 FINTECH SUMMER INTERN · CUTOFF IN 12 DAYS
           </div>
         </div>
@@ -190,33 +223,60 @@
                 <span class="w-3 h-3 bg-coral rounded-full neo-border"></span>
                 <span class="font-display text-base uppercase">1. RAW UNSTRUCTURED POST</span>
               </div>
-              <button class="font-mono text-xs font-bold underline hover:text-coral flex items-center gap-1" id="btn-reset-text">
-                <span class="material-symbols-outlined text-[14px]">history</span> RESET
+              <div class="flex items-center gap-3">
+                <button type="button" class="font-mono text-xs font-bold underline hover:text-mint-dark flex items-center gap-1" id="btn-focus-essential" title="Filter to show only job requirements and timeline">
+                  <span class="material-symbols-outlined text-[14px]">filter_list</span> FOCUS REQUIREMENTS
+                </button>
+                <button type="button" class="font-mono text-xs font-bold underline hover:text-coral flex items-center gap-1" id="btn-reset-text">
+                  <span class="material-symbols-outlined text-[14px]">history</span> RESET
+                </button>
+              </div>
+            </div>
+
+            <p class="font-mono text-xs font-bold text-ink/80">
+              Paste any messy notification, PDF copy-paste, or LinkedIn blast:
+            </p>
+
+            <div class="relative">
+              <textarea class="w-full bg-paper neo-border p-3 font-mono text-xs font-semibold text-ink leading-relaxed focus:bg-white focus:outline-none focus:ring-0 resize-none shadow-hard-sm" id="jd-input" rows="6" placeholder="Paste your job description, internship post, or eligibility criteria here... (or click 'LOAD SAMPLE B.TECH' above to test a sample)"></textarea>
+              <div class="absolute bottom-2 right-2 bg-yellow font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">
+                DETERMINISTIC V4
+              </div>
+            </div>
+
+            <!-- In-Memory PDF Upload Bar -->
+            <div class="bg-paper p-2.5 neo-border flex items-center justify-between gap-2 shadow-hard-sm">
+              <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[18px]">upload_file</span>
+                <span class="font-mono text-[11px] font-bold">Upload Brochure / JD PDF:</span>
+              </div>
+              <input type="file" id="opp-file-input" accept=".pdf,.docx,.txt" class="hidden">
+              <button type="button" id="btn-upload-opp-file" class="neo-btn bg-white hover:bg-yellow text-ink font-mono text-[11px] font-black px-2 py-1 neo-border">
+                CHOOSE PDF
               </button>
             </div>
-            
-            <p class="font-mono text-xs font-bold text-ink/80">Paste any messy notification, PDF copy-paste, or LinkedIn blast:</p>
-            
-            <div class="relative">
-              <textarea class="w-full bg-paper neo-border p-3 font-mono text-xs font-semibold text-ink leading-relaxed focus:bg-white focus:outline-none focus:ring-0 resize-none shadow-hard-sm" id="jd-input" rows="6">Hiring Summer Interns: 2nd or 3rd-year B.Tech students (CSE/IT), minimum CGPA &gt;= 7.5. Required tech stack: HTML, CSS, JavaScript. Must submit Resume and Portfolio/GitHub link. Duration: 8 weeks full-time starting June 15th.</textarea>
-              <div class="absolute bottom-2 right-2 bg-yellow font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">DETERMINISTIC V4</div>
-            </div>
+            <div id="opp-file-status" class="font-mono text-[11px] font-bold empty:hidden"></div>
 
-            <!-- Candidate Snapshot -->
+            <!-- Candidate Snapshot Card with Quick Profile Drawer Trigger -->
             <div class="grid grid-cols-2 gap-2">
-              <div class="bg-paper p-2 neo-border">
+              <div class="bg-paper p-2 neo-border cursor-pointer hover:bg-yellow/20 transition-colors" id="card-snapshot-profile" title="Click to edit your candidate profile">
                 <span class="font-mono text-[10px] uppercase font-bold text-ink/60 block">Candidate Identity</span>
-                <span class="font-mono text-xs font-black" id="candidate-snapshot-name">Aarav S. (B.Tech 2nd Yr)</span>
+                <span class="font-mono text-xs font-black" id="candidate-snapshot-name">Click Edit to set profile</span>
               </div>
-              <div class="bg-paper p-2 neo-border">
+              <div class="bg-paper p-2 neo-border cursor-pointer hover:bg-yellow/20 transition-colors" id="card-snapshot-cgpa" title="Click to edit your candidate profile">
                 <span class="font-mono text-[10px] uppercase font-bold text-ink/60 block">Academic Record</span>
-                <span class="font-mono text-xs font-black text-mint-dark" id="candidate-snapshot-cgpa">8.2 / 10 CGPA [PASS]</span>
+                <span class="font-mono text-xs font-black text-ink" id="candidate-snapshot-cgpa">CGPA not set</span>
               </div>
             </div>
 
-            <button class="neo-btn bg-yellow text-ink font-display text-sm uppercase py-2.5 px-4 neo-border flex items-center justify-center gap-2 w-full shadow-hard" id="btn-run-compare">
-              <span class="material-symbols-outlined text-[18px]">rule</span> RE-EXTRACT ATOMIC CRITERIA
-            </button>
+            <div class="flex items-center justify-between gap-2">
+              <button class="neo-btn bg-yellow text-ink font-display text-sm uppercase py-2.5 px-4 neo-border flex-1 flex items-center justify-center gap-2 shadow-hard" id="btn-run-compare">
+                <span class="material-symbols-outlined text-[18px]">rule</span> RE-EXTRACT ATOMIC CRITERIA
+              </button>
+              <button class="neo-btn bg-white hover:bg-lilac-light text-ink font-mono text-xs uppercase p-2.5 neo-border shadow-hard-sm" id="btn-snapshot-edit-profile" title="Open full student profile">
+                <span class="material-symbols-outlined text-[18px]">edit</span>
+              </button>
+            </div>
           </div>
 
           <!-- Screen 2: Evidence Checklist (7 cols) -->
@@ -226,12 +286,17 @@
                 <span class="w-3 h-3 bg-mint rounded-full neo-border"></span>
                 <span class="font-display text-base uppercase">2. VERIFIABLE EVIDENCE AUDIT</span>
               </div>
-              <span class="bg-paper px-2 py-0.5 neo-border font-mono text-xs font-bold" id="rules-count-pill">6 HARD RULES</span>
+              <div class="flex items-center gap-2">
+                <span class="bg-paper px-2 py-0.5 neo-border font-mono text-xs font-bold" id="rules-count-pill">6 HARD RULES</span>
+                <button id="btn-add-req-modal" class="neo-btn bg-white hover:bg-yellow font-mono text-[11px] font-black px-2 py-0.5 neo-border shadow-hard-sm uppercase">
+                  + ADD RULE
+                </button>
+              </div>
             </div>
 
-            <!-- Rules Card List -->
-            <div class="flex flex-col gap-2.5 max-h-[380px] overflow-y-auto pr-1" id="evidence-cards-container">
-              <!-- Rule 1: Year of Study -->
+            <!-- Rules Card List (Scrollable neo-container) -->
+            <div class="flex flex-col gap-2.5 max-h-[390px] overflow-y-auto pr-1" id="checklist-cards-container">
+              <!-- Dynamically populated or default Section 8 sample rules -->
               <div class="p-2.5 bg-mint/30 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
                 <div class="flex items-center gap-2.5">
                   <span class="font-display text-xl text-black">✓</span>
@@ -244,7 +309,6 @@
                 <span class="bg-mint text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase">VERIFIED</span>
               </div>
 
-              <!-- Rule 2: Minimum CGPA -->
               <div class="p-2.5 bg-mint/30 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
                 <div class="flex items-center gap-2.5">
                   <span class="font-display text-xl text-black">✓</span>
@@ -257,7 +321,6 @@
                 <span class="bg-mint text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase">VERIFIED</span>
               </div>
 
-              <!-- Rule 3: Core Skills -->
               <div class="p-2.5 bg-coral/20 neo-border flex items-center justify-between gap-3 shadow-hard-sm" id="evidence-skill-card">
                 <div class="flex items-center gap-2.5">
                   <span class="font-display text-xl text-coral" id="evidence-skill-icon">✕</span>
@@ -270,7 +333,6 @@
                 <span class="bg-coral text-white font-mono font-black text-xs px-2 py-0.5 neo-border uppercase" id="evidence-skill-badge">GAP: NO JS</span>
               </div>
 
-              <!-- Rule 4: Resume Artifact -->
               <div class="p-2.5 bg-mint/30 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
                 <div class="flex items-center gap-2.5">
                   <span class="font-display text-xl text-black">✓</span>
@@ -283,7 +345,6 @@
                 <span class="bg-mint text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase">ON FILE</span>
               </div>
 
-              <!-- Rule 5: Portfolio / GitHub -->
               <div class="p-2.5 bg-yellow/40 neo-border flex items-center justify-between gap-3 shadow-hard-sm" id="evidence-github-card">
                 <div class="flex items-center gap-2.5">
                   <span class="font-display text-xl text-ink" id="evidence-github-icon">?</span>
@@ -296,7 +357,6 @@
                 <span class="bg-yellow text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase" id="evidence-github-badge">MISSING LINK</span>
               </div>
 
-              <!-- Rule 6: Full-Time Duration -->
               <div class="p-2.5 bg-yellow/40 neo-border flex items-center justify-between gap-3 shadow-hard-sm" id="evidence-avail-card">
                 <div class="flex items-center gap-2.5">
                   <span class="font-display text-xl text-ink" id="evidence-avail-icon">?</span>
@@ -336,7 +396,9 @@
                     <h3 class="font-display text-lg uppercase" id="verdict-title">NOT READY TO APPLY YET</h3>
                     <span class="bg-black text-white font-mono text-[10px] font-black px-1.5 py-0.5 uppercase" id="verdict-tag">BLOCKED</span>
                   </div>
-                  <p class="font-mono text-xs font-bold text-ink mt-1" id="verdict-desc">JavaScript missing from candidate profile; Portfolio URL &amp; Availability unconfirmed.</p>
+                  <p class="font-mono text-xs font-bold text-ink mt-1" id="verdict-desc">
+                    JavaScript missing from candidate profile; Portfolio URL &amp; Availability unconfirmed.
+                  </p>
                 </div>
               </div>
               <button class="bg-paper text-ink/50 font-mono font-black text-xs uppercase px-3 py-2 neo-border cursor-not-allowed shrink-0" id="btn-packet-gen">
@@ -403,7 +465,7 @@
             </p>
 
             <!-- Giant Tactile Checkbox Cards -->
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-3" id="what-if-toggles-container">
               <!-- Toggle 1: JS -->
               <label class="p-3 bg-paper hover:bg-yellow/20 neo-border flex items-center justify-between cursor-pointer shadow-hard-sm transition-all select-none">
                 <div class="flex items-center gap-3">
@@ -447,12 +509,18 @@
                 <span class="font-display text-2xl">🎉</span>
                 <span class="font-display text-lg uppercase">100% READY TO APPLY!</span>
               </div>
-              <p class="font-mono text-xs font-black">All ATS parameters verified with bulletproof citations. You are ready to crush the interview pipeline.</p>
+              <p class="font-mono text-xs font-black">
+                All ATS parameters verified with bulletproof citations. You are ready to crush the interview pipeline.
+              </p>
             </div>
 
             <div class="flex items-center justify-between pt-2 border-t-2 border-black">
-              <button class="font-mono text-xs font-black uppercase underline hover:text-coral" id="btn-toggle-all">Toggle All Upgrades</button>
-              <span class="font-mono text-xs font-bold bg-paper px-2 py-1 neo-border" id="lbl-toggle-count">0 of 3 Applied</span>
+              <button class="font-mono text-xs font-black uppercase underline hover:text-coral" id="btn-toggle-all">
+                Toggle All Upgrades
+              </button>
+              <span class="font-mono text-xs font-bold bg-paper px-2 py-1 neo-border" id="lbl-toggle-count">
+                0 of 3 Applied
+              </span>
             </div>
           </div>
         </div>
@@ -464,17 +532,23 @@
       <section class="bg-white neo-border-thick p-6 shadow-hard flex flex-col gap-5 reveal-on-scroll" id="action-runway-solutions">
         <div class="flex items-center justify-between flex-wrap gap-4 border-b-4 border-black pb-3">
           <div>
-            <div class="inline-block bg-yellow font-mono text-[10px] font-black px-2 py-0.5 neo-border uppercase mb-1 shadow-hard-sm sticker-tilt-1">DEADLINE SPRINT MATRIX · FINTECH SUMMER INTERN</div>
+            <div class="inline-block bg-yellow font-mono text-[10px] font-black px-2 py-0.5 neo-border uppercase mb-1 shadow-hard-sm sticker-tilt-1">
+              DEADLINE SPRINT MATRIX · FINTECH SUMMER INTERN
+            </div>
             <h3 class="font-display text-2xl sm:text-3xl uppercase">12-DAY ACTION RUNWAY &amp; SOLUTIONS MATRIX</h3>
           </div>
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="bg-coral text-white px-3 py-1 neo-border font-mono text-xs font-black uppercase shadow-hard-sm sticker-tilt-2">⏱️ 12 DAYS LEFT</span>
-            <span class="bg-mint text-ink px-3 py-1 neo-border font-mono text-xs font-black uppercase shadow-hard-sm">⚡ 5 DAYS EFFORT REQUIRED (+7 DAYS BUFFER)</span>
+            <span class="bg-coral text-white px-3 py-1 neo-border font-mono text-xs font-black uppercase shadow-hard-sm sticker-tilt-2">
+              ⏱️ 12 DAYS LEFT
+            </span>
+            <span class="bg-mint text-ink px-3 py-1 neo-border font-mono text-xs font-black uppercase shadow-hard-sm">
+              ⚡ 5 DAYS EFFORT REQUIRED (+7 DAYS BUFFER)
+            </span>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <!-- Step 1 -->
+          <!-- Step 1: Admin Sprint -->
           <div class="bg-yellow/30 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
             <div class="flex flex-col gap-2">
               <div class="flex items-center justify-between">
@@ -483,6 +557,7 @@
               </div>
               <h4 class="font-display text-sm uppercase mt-1">ADMINISTRATIVE SPRINT</h4>
               <p class="font-mono text-xs text-ink/80 font-bold">Clear both Unknowns immediately with zero tech friction:</p>
+              
               <div class="flex flex-col gap-2 mt-1">
                 <div class="bg-white p-2 neo-border flex flex-col gap-1">
                   <div class="flex items-center justify-between">
@@ -500,13 +575,14 @@
                 </div>
               </div>
             </div>
+
             <div class="border-t border-black pt-2 flex items-center justify-between">
               <span class="font-mono text-[10px] font-black text-ink/70 uppercase">Effort: &lt; 20 Mins</span>
               <span class="bg-mint text-ink font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">CLEARS 2 UNKNOWNS</span>
             </div>
           </div>
 
-          <!-- Step 2 -->
+          <!-- Step 2: JS Intensive -->
           <div class="bg-lilac/30 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
             <div class="flex flex-col gap-2">
               <div class="flex items-center justify-between">
@@ -515,6 +591,7 @@
               </div>
               <h4 class="font-display text-sm uppercase mt-1">JAVASCRIPT INTENSIVE</h4>
               <p class="font-mono text-xs text-ink/80 font-bold">5-day micro-sprint (90 min/day) to bridge mandatory skill gap:</p>
+              
               <div class="flex flex-col gap-1.5 mt-1">
                 <div class="bg-white p-1.5 neo-border flex items-center justify-between">
                   <span class="font-mono text-[10px] font-black uppercase">Day 3: DOM &amp; Events</span>
@@ -534,13 +611,14 @@
                 </div>
               </div>
             </div>
+
             <div class="border-t border-black pt-2 flex items-center justify-between">
               <span class="font-mono text-[10px] font-black text-ink/70 uppercase">Effort: 5 Full Days</span>
               <span class="bg-coral text-white font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">BRIDGES JS GAP</span>
             </div>
           </div>
 
-          <!-- Step 3 -->
+          <!-- Step 3: ATS Proof -->
           <div class="bg-mint/30 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
             <div class="flex flex-col gap-2">
               <div class="flex items-center justify-between">
@@ -549,6 +627,7 @@
               </div>
               <h4 class="font-display text-sm uppercase mt-1">ATS PROOF-OF-WORK</h4>
               <p class="font-mono text-xs text-ink/80 font-bold">Package verifiable artifacts for deterministic screening:</p>
+              
               <div class="flex flex-col gap-2 mt-1">
                 <div class="bg-white p-2 neo-border flex flex-col gap-1">
                   <span class="font-mono text-[11px] font-black uppercase">Deploy Live Demo</span>
@@ -560,13 +639,14 @@
                 </div>
               </div>
             </div>
+
             <div class="border-t border-black pt-2 flex items-center justify-between">
               <span class="font-mono text-[10px] font-black text-ink/70 uppercase">Effort: 2 Days</span>
               <span class="bg-mint text-ink font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">100% AUDIT READY</span>
             </div>
           </div>
 
-          <!-- Step 4 -->
+          <!-- Step 4: Safe Buffer -->
           <div class="bg-paper neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
             <div class="flex flex-col gap-2">
               <div class="flex items-center justify-between">
@@ -575,6 +655,7 @@
               </div>
               <h4 class="font-display text-sm uppercase mt-1">PRE-FLIGHT DRY-RUN</h4>
               <p class="font-mono text-xs text-ink/80 font-bold">Zero panic submit window before official ATS cutoff:</p>
+              
               <div class="bg-white p-2.5 neo-border mt-1 flex flex-col gap-1.5">
                 <div class="flex items-center gap-1.5">
                   <span class="text-mint-dark font-black">✓</span>
@@ -590,6 +671,7 @@
                 </div>
               </div>
             </div>
+
             <div class="border-t border-black pt-2 flex items-center justify-between">
               <span class="font-mono text-[10px] font-black text-mint-dark uppercase">Buffer: 48h Safe Zone</span>
               <span class="bg-black text-white font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">ZERO RISK</span>
@@ -604,21 +686,27 @@
       <section class="bg-white neo-border-thick p-6 sm:p-8 shadow-hard-xl flex flex-col gap-6 reveal-on-scroll" id="closest-win-section">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-4 border-black pb-4">
           <div>
-            <div class="inline-block bg-yellow font-mono text-xs font-black px-2 py-0.5 neo-border uppercase mb-2 shadow-hard-sm sticker-tilt-1">PORTFOLIO ROI ENGINE</div>
-            <h2 class="font-display text-3xl sm:text-4xl uppercase">CLOSEST WIN MULTI-OPPORTUNITY <br>RANKING</h2>
+            <div class="inline-block bg-yellow font-mono text-xs font-black px-2 py-0.5 neo-border uppercase mb-2 shadow-hard-sm sticker-tilt-1">
+              PORTFOLIO ROI ENGINE
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl uppercase">
+              CLOSEST WIN MULTI-OPPORTUNITY <br>RANKING
+            </h2>
             <p class="font-mono text-xs sm:text-sm font-bold text-ink/80 mt-1 max-w-2xl">
               Never spam 200 random applications. Rank targets by highest ceiling conversion efficiency and zero fatal locks.
             </p>
           </div>
-          <button class="neo-btn bg-paper font-mono font-black text-xs uppercase px-4 py-2.5 neo-border self-start md:self-auto flex items-center gap-2 shadow-hard-sm">
+          <button class="neo-btn bg-paper font-mono font-black text-xs uppercase px-4 py-2.5 neo-border self-start md:self-auto flex items-center gap-2 shadow-hard-sm" id="btn-add-target-op">
             <span class="material-symbols-outlined text-[16px]">add_circle</span> ADD TARGET OP
           </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Target 1 -->
+          <!-- Target 1: Instant Win -->
           <div class="bg-yellow/20 neo-border-thick p-5 shadow-hard flex flex-col justify-between relative sticker-tilt-1">
-            <div class="absolute -top-3.5 left-4 bg-coral text-white neo-border px-3 py-0.5 font-mono text-xs font-black uppercase shadow-hard-sm">★ RANK #1: INSTANT WIN</div>
+            <div class="absolute -top-3.5 left-4 bg-coral text-white neo-border px-3 py-0.5 font-mono text-xs font-black uppercase shadow-hard-sm">
+              ★ RANK #1: INSTANT WIN
+            </div>
             <div class="flex flex-col gap-3 mt-2">
               <div class="flex items-center justify-between border-b-2 border-black pb-2">
                 <span class="font-mono text-xs font-black uppercase">Fintech Corp</span>
@@ -626,10 +714,11 @@
               </div>
               <h4 class="font-display text-xl uppercase">FRONTEND INTERN (REACT)</h4>
               <p class="font-mono text-xs font-bold text-ink/80">Stipend: ₹45,000/mo · Remote · 8 Wks</p>
+              
               <div class="bg-white p-3 neo-border flex flex-col gap-2 shadow-hard-sm">
                 <div class="flex items-center justify-between font-mono text-xs font-bold">
                   <span>Effort to 100%</span>
-                  <span class="bg-mint px-1.5 py-0.2 neo-border font-black">5 DAYS</span>
+                  <span class="bg-mint px-1.5 py-0.5 neo-border font-black">5 DAYS</span>
                 </div>
                 <div class="w-full bg-paper h-3 neo-border overflow-hidden">
                   <div class="bg-coral h-full" style="width: 83%;"></div>
@@ -645,7 +734,7 @@
             </button>
           </div>
 
-          <!-- Target 2 -->
+          <!-- Target 2: Backup -->
           <div class="bg-paper neo-border-thick p-5 shadow-hard flex flex-col justify-between">
             <div class="flex flex-col gap-3">
               <div class="flex items-center justify-between border-b-2 border-black pb-2">
@@ -657,10 +746,11 @@
                 <h4 class="font-display text-xl uppercase mt-1">TRAVEL SCHOLARSHIP</h4>
               </div>
               <p class="font-mono text-xs font-bold text-ink/80">Grant: $2,500 travel + conference pass</p>
+              
               <div class="bg-white p-3 neo-border flex flex-col gap-2 shadow-hard-sm">
                 <div class="flex items-center justify-between font-mono text-xs font-bold">
                   <span>Effort to 100%</span>
-                  <span class="bg-yellow px-1.5 py-0.2 neo-border font-black">10 DAYS</span>
+                  <span class="bg-yellow px-1.5 py-0.5 neo-border font-black">10 DAYS</span>
                 </div>
                 <div class="w-full bg-paper h-3 neo-border overflow-hidden">
                   <div class="bg-yellow h-full" style="width: 60%;"></div>
@@ -676,8 +766,8 @@
             </button>
           </div>
 
-          <!-- Target 3 -->
-          <div class="bg-paper neo-border p-5 shadow-hard flex flex-col justify-between opacity-60">
+          <!-- Target 3: Hard Stop / Skip -->
+          <div class="bg-paper neo-border p-5 shadow-hard flex flex-col justify-between opacity-75">
             <div class="flex flex-col gap-3">
               <div class="flex items-center justify-between border-b-2 border-black pb-2">
                 <span class="font-mono text-xs font-black uppercase text-ink/70">Govt AI Council</span>
@@ -688,6 +778,7 @@
                 <h4 class="font-display text-xl uppercase mt-1">NATIONAL HACKATHON</h4>
               </div>
               <p class="font-mono text-xs font-bold text-ink/70">Cash Pool: ₹10,00,000 · 4th Yr Only</p>
+              
               <div class="bg-white p-3 neo-border flex flex-col gap-2">
                 <div class="flex items-center justify-between font-mono text-xs font-bold text-coral">
                   <span>Hard Block</span>
@@ -712,14 +803,15 @@
       <section class="bg-white neo-border-thick p-6 sm:p-8 shadow-hard-xl flex flex-col gap-6 reveal-on-scroll" id="pricing-section">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-4 border-black pb-4">
           <div>
-            <div class="inline-block bg-mint font-mono text-xs font-black px-2 py-0.5 neo-border uppercase mb-2 shadow-hard-sm sticker-tilt-2">SUSTAINABLE UNIT ECONOMICS</div>
-            <h2 class="font-display text-3xl sm:text-4xl uppercase">4 HIGH-VELOCITY REVENUE <br>STREAMS</h2>
+            <div class="inline-block bg-mint font-mono text-xs font-black px-2 py-0.5 neo-border uppercase mb-2 shadow-hard-sm sticker-tilt-2">
+              SUSTAINABLE UNIT ECONOMICS
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl uppercase">
+              4 HIGH-VELOCITY REVENUE <br>STREAMS
+            </h2>
             <p class="font-mono text-xs sm:text-sm font-bold text-ink/80 mt-1 max-w-2xl">
               Low CAC viral student acquisition subsidizes high LTV college and recruiter licensing.
             </p>
-          </div>
-          <div class="bg-yellow neo-border p-3 shadow-hard-sm font-mono text-xs font-black uppercase">
-            TARGET FY25 ARR: <span class="bg-black text-yellow px-1.5 py-0.5 ml-1">₹1.84 CR ($220K USD)</span>
           </div>
         </div>
 
@@ -781,8 +873,244 @@
     </div>
   </main>
 
+  <!-- ===================================================================
+       STUDENT PROFILE SLIDE-OUT DRAWER (FULL SQLITE & RESUME ENGINE)
+       =================================================================== -->
+  <div id="profile-drawer-backdrop" class="drawer-backdrop" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+    <div class="drawer-content p-6 flex flex-col gap-5">
+      
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between border-b-4 border-black pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-yellow neo-border flex items-center justify-center font-display text-lg">👤</div>
+          <div>
+            <h3 id="drawer-title" class="font-display text-xl uppercase">STUDENT PROFILE &amp; RESUME</h3>
+            <span class="font-mono text-[11px] font-bold text-ink/70">Single Persistent SQLite Profile · 100% Confidential</span>
+          </div>
+        </div>
+        <button id="btn-close-profile-drawer" class="neo-btn bg-white hover:bg-coral hover:text-white p-1.5 neo-border text-xs font-mono font-black" aria-label="Close drawer">
+          ✕
+        </button>
+      </div>
+
+      <!-- Backend & Persistence Status -->
+      <div class="p-3 bg-paper neo-border flex items-center justify-between gap-2 shadow-hard-sm">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 bg-mint-dark rounded-full neo-border" id="backend-status-indicator"></span>
+          <span class="font-mono text-xs font-bold" id="backend-status-text">SQLite Backend: Ready</span>
+        </div>
+        <span class="font-mono text-[10px] font-black bg-white px-2 py-0.5 neo-border" id="profile-save-indicator">Synced</span>
+      </div>
+
+      <!-- In-Memory Resume Upload Bar -->
+      <div class="p-3 bg-white neo-border-thick flex flex-col gap-2 shadow-hard-sm">
+        <div class="flex items-center justify-between">
+          <span class="font-display text-xs uppercase">RESUME AUTO-DECODER (OPTIONAL)</span>
+          <span class="bg-yellow font-mono text-[9px] font-black px-1.5 py-0.5 neo-border uppercase">ZERO DISK RETENTION</span>
+        </div>
+        <p class="font-mono text-[11px] text-ink/70">
+          Upload PDF or DOCX resume to extract suggested skills &amp; education into your profile with full human review:
+        </p>
+        <div class="flex items-center gap-2">
+          <input type="file" id="resume-file-input" accept=".pdf,.docx" class="hidden">
+          <button id="btn-trigger-upload" class="neo-btn bg-mint font-mono text-xs font-black uppercase px-3 py-1.5 neo-border flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">upload</span> CHOOSE RESUME (.PDF / .DOCX)
+          </button>
+          <span id="upload-status-text" class="font-mono text-[11px] font-bold"></span>
+        </div>
+      </div>
+
+      <!-- Profile Form -->
+      <form id="profile-form" class="flex flex-col gap-4" onsubmit="return false;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="prof-name" class="font-mono text-xs font-black uppercase block mb-1">Full Name</label>
+            <input type="text" id="prof-name" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="e.g. Aarav S.">
+          </div>
+          <div>
+            <label for="prof-year" class="font-mono text-xs font-black uppercase block mb-1">Year of Study</label>
+            <select id="prof-year" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold">
+              <option value="">-- Select Year --</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year (Final)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label for="prof-cgpa" class="font-mono text-xs font-black uppercase block mb-1">CGPA (0–10)</label>
+            <input type="number" step="0.01" min="0" max="10" id="prof-cgpa" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="8.2">
+            <div id="cgpa-validation-msg" class="font-mono text-[10px] text-coral font-bold hidden"></div>
+          </div>
+          <div>
+            <label for="prof-degree" class="font-mono text-xs font-black uppercase block mb-1">Degree</label>
+            <input type="text" id="prof-degree" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="B.Tech">
+          </div>
+          <div>
+            <label for="prof-branch" class="font-mono text-xs font-black uppercase block mb-1">Branch</label>
+            <input type="text" id="prof-branch" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="CSE">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="prof-availability" class="font-mono text-xs font-black uppercase block mb-1">Availability (Weeks)</label>
+            <input type="number" min="0" max="52" id="prof-availability" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="8">
+          </div>
+          <div>
+            <label for="opp-deadline" class="font-mono text-xs font-black uppercase block mb-1">Target Cutoff Date</label>
+            <input type="date" id="opp-deadline" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold">
+          </div>
+        </div>
+
+        <div>
+          <label for="prof-skills" class="font-mono text-xs font-black uppercase block mb-1">Technical Skills (Comma separated)</label>
+          <input type="text" id="prof-skills" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="HTML, CSS, JavaScript, React, Python">
+          <span class="font-mono text-[10px] text-ink/70 mt-1 block">Aliases auto-normalized (e.g. js &rarr; JavaScript).</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="prof-link-portfolio" class="font-mono text-xs font-black uppercase block mb-1">Portfolio URL</label>
+            <input type="url" id="prof-link-portfolio" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="https://aarav.dev">
+          </div>
+          <div>
+            <label for="prof-link-github" class="font-mono text-xs font-black uppercase block mb-1">GitHub Profile URL</label>
+            <input type="url" id="prof-link-github" class="w-full bg-white neo-border p-2 font-mono text-xs font-bold" placeholder="https://github.com/aarav">
+          </div>
+        </div>
+
+        <!-- Materials Ready Checkboxes -->
+        <div>
+          <span class="font-mono text-xs font-black uppercase block mb-2">Documents &amp; Materials Ready</span>
+          <div class="grid grid-cols-2 gap-2 font-mono text-xs font-bold">
+            <label class="flex items-center gap-2 p-1.5 bg-paper neo-border cursor-pointer">
+              <input type="checkbox" id="prof-doc-resume" class="w-4 h-4 neo-border"> Resume / CV
+            </label>
+            <label class="flex items-center gap-2 p-1.5 bg-paper neo-border cursor-pointer">
+              <input type="checkbox" id="prof-doc-marksheet" class="w-4 h-4 neo-border"> Marksheet
+            </label>
+            <label class="flex items-center gap-2 p-1.5 bg-paper neo-border cursor-pointer">
+              <input type="checkbox" id="prof-doc-income" class="w-4 h-4 neo-border"> Income Cert.
+            </label>
+            <label class="flex items-center gap-2 p-1.5 bg-paper neo-border cursor-pointer">
+              <input type="checkbox" id="prof-doc-statement" class="w-4 h-4 neo-border"> SOP / Statement
+            </label>
+            <label class="flex items-center gap-2 p-1.5 bg-paper neo-border cursor-pointer">
+              <input type="checkbox" id="prof-doc-prototype" class="w-4 h-4 neo-border"> Prototype
+            </label>
+            <label class="flex items-center gap-2 p-1.5 bg-paper neo-border cursor-pointer">
+              <input type="checkbox" id="prof-doc-video" class="w-4 h-4 neo-border"> Demo Video
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2 pt-3 border-t-2 border-black">
+          <button id="btn-profile-save" class="neo-btn bg-yellow font-mono text-xs font-black uppercase px-4 py-2 neo-border flex-1">
+            SAVE TO SQLITE
+          </button>
+          <button id="btn-profile-sample" class="neo-btn bg-white hover:bg-paper font-mono text-xs font-black uppercase px-3 py-2 neo-border">
+            LOAD SAMPLE
+          </button>
+          <button id="btn-profile-clear" class="neo-btn bg-coral text-white font-mono text-xs font-black uppercase px-3 py-2 neo-border">
+            RESET
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL: ADD CUSTOM REQUIREMENT
+       =================================================================== -->
+  <div id="modal-add-req" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-add-title">
+    <div class="modal-content flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b-2 border-black pb-2">
+        <h3 id="modal-add-title" class="font-display text-lg uppercase">ADD CUSTOM REQUIREMENT</h3>
+        <button type="button" class="neo-btn bg-white p-1 text-xs font-mono font-black neo-border" id="btn-close-add-modal">&times;</button>
+      </div>
+
+      <form id="add-req-form" class="flex flex-col gap-3" onsubmit="return false;">
+        <div>
+          <label for="new-req-label" class="font-mono text-xs font-black uppercase block mb-1">Requirement Label *</label>
+          <input type="text" id="new-req-label" class="w-full bg-paper neo-border p-2 font-mono text-xs font-bold" placeholder="e.g. State residency, Age limit, or Python skill" required>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="new-req-category" class="font-mono text-xs font-black uppercase block mb-1">Category</label>
+            <select id="new-req-category" class="w-full bg-paper neo-border p-2 font-mono text-xs font-bold">
+              <option value="eligibility">Eligibility</option>
+              <option value="skills">Skills</option>
+              <option value="documents">Documents</option>
+              <option value="links">Links</option>
+              <option value="logistics">Logistics</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="new-req-effort" class="font-mono text-xs font-black uppercase block mb-1">Effort Type</label>
+            <select id="new-req-effort" class="w-full bg-paper neo-border p-2 font-mono text-xs font-bold">
+              <option value="quick">Quick (0 days)</option>
+              <option value="days" selected>Days (1–5 days)</option>
+              <option value="weeks">Weeks (7–14 days)</option>
+              <option value="locked">Locked (Non-fixable)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="new-req-evidence" class="font-mono text-xs font-black uppercase block mb-1">Source Evidence Excerpt</label>
+          <input type="text" id="new-req-evidence" class="w-full bg-paper neo-border p-2 font-mono text-xs font-bold" placeholder="Source sentence from opportunity text">
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-black">
+          <button type="button" id="btn-cancel-add-modal" class="neo-btn bg-white font-mono text-xs font-black uppercase px-3 py-1.5 neo-border">
+            CANCEL
+          </button>
+          <button type="button" id="btn-save-new-req" class="neo-btn bg-yellow font-mono text-xs font-black uppercase px-4 py-1.5 neo-border">
+            ADD TO CHECKLIST
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL: RESUME REVIEW SUGGESTIONS
+       =================================================================== -->
+  <div id="modal-resume-review" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-resume-title">
+    <div class="modal-content flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b-2 border-black pb-2">
+        <h3 id="modal-resume-title" class="font-display text-lg uppercase">REVIEW RESUME SUGGESTIONS</h3>
+        <button type="button" class="neo-btn bg-white p-1 text-xs font-mono font-black neo-border" id="btn-close-resume-modal">&times;</button>
+      </div>
+
+      <p class="font-mono text-xs font-bold text-ink/80">
+        Review suggested fields extracted from your resume. Uncheck any item you do not wish to adopt. A resume upload will never silently overwrite confirmed data.
+      </p>
+
+      <div id="resume-suggestions-list" class="flex flex-col gap-2 max-h-60 overflow-y-auto pr-1">
+        <!-- Dynamically populated checkboxes -->
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-black">
+        <button type="button" id="btn-reject-resume" class="neo-btn bg-white font-mono text-xs font-black uppercase px-3 py-1.5 neo-border">
+          DISCARD
+        </button>
+        <button type="button" id="btn-accept-resume" class="neo-btn bg-mint font-mono text-xs font-black uppercase px-4 py-1.5 neo-border">
+          APPLY SUGGESTIONS
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Back to Top Button -->
-  <button id="btn-back-to-top" aria-label="Back to top" title="Scroll to top">
+  <button id="btn-back-to-top" class="neo-btn neo-border shadow-hard items-center justify-center font-display text-lg" aria-label="Back to top" title="Scroll to top">
     ↑
   </button>
 

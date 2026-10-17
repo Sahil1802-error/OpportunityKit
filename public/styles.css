@@ -1,11 +1,36 @@
 /* ==========================================================================
-   OpportunityKit — Neo-Brutalist Pop-Zine Design System (Target A)
-   Modeled strictly after code.html and screen.png
+   OpportunityKit — Neo-Brutalist Design System & Accessible Stylesheet
+   Modeled strictly after the UI Mockup & Screen Specifications
    ========================================================================== */
 
-/* Base Reset & Smooth Scroll */
+:root {
+  --color-paper: #faf7f0;
+  --color-ink: #000000;
+  --color-white: #ffffff;
+  --color-yellow: #fde047;
+  --color-yellow-dark: #facc15;
+  --color-lilac: #c084fc;
+  --color-lilac-light: #e9d5ff;
+  --color-mint: #86efac;
+  --color-mint-dark: #22c55e;
+  --color-coral: #fb7185;
+  --color-coral-light: #fecdd3;
+  
+  --font-display: 'Archivo Black', 'Space Grotesk', -apple-system, sans-serif;
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-hard-sm: 2px 2px 0px #000000;
+  --shadow-hard: 4px 4px 0px #000000;
+  --shadow-hard-lg: 6px 6px 0px #000000;
+  --shadow-hard-xl: 8px 8px 0px #000000;
+}
+
+/* Base Reset */
 *, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -13,16 +38,18 @@ html {
 }
 
 body {
-  background-color: #faf7f0;
-  color: #000000;
-  margin: 0;
-  padding: 0;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
 
 ::selection {
-  background: #fde047;
-  color: #000000;
+  background: var(--color-yellow);
+  color: var(--color-ink);
 }
 
 /* Accessible Focus States */
@@ -31,7 +58,63 @@ body {
   outline-offset: 2px;
 }
 
-/* Core Neo-Brutalist Classes */
+/* Custom Neo-Brutalist Scrollbars */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+  border-left: 2px solid #000000;
+  border-top: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-yellow);
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-coral);
+}
+
+/* Top Scroll Progress Indicator */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--color-coral);
+  width: 0%;
+  z-index: 1000;
+  border-bottom: 1px solid #000000;
+  transition: width 0.1s ease-out;
+}
+
+/* Skip link for keyboard accessibility */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  border: 3px solid #000000;
+  box-shadow: var(--shadow-hard);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 8px 16px;
+  z-index: 2000;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Neo-Brutalist Core Utility Classes */
 .neo-border {
   border: 3px solid #000000;
 }
@@ -52,34 +135,39 @@ body {
   border-top: 3px solid #000000;
 }
 
-/* Hard Drop Shadows */
 .shadow-hard-sm {
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: var(--shadow-hard-sm);
 }
 
 .shadow-hard {
-  box-shadow: 4px 4px 0px #000000;
+  box-shadow: var(--shadow-hard);
 }
 
 .shadow-hard-lg {
-  box-shadow: 6px 6px 0px #000000;
+  box-shadow: var(--shadow-hard-lg);
 }
 
 .shadow-hard-xl {
-  box-shadow: 8px 8px 0px #000000;
+  box-shadow: var(--shadow-hard-xl);
 }
 
-/* Interactive Neo Button - DO NOT force font-mono so font-display works! */
+/* Interactive Neo Button */
 .neo-btn {
-  box-shadow: 4px 4px 0px #000000;
+  box-shadow: var(--shadow-hard);
   transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
   cursor: pointer;
+  border: 3px solid #000000;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 800;
 }
 
 .neo-btn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  box-shadow: var(--shadow-hard-lg);
 }
 
 .neo-btn:active {
@@ -90,8 +178,9 @@ body {
 .neo-btn:disabled,
 .neo-btn.cursor-not-allowed {
   cursor: not-allowed;
+  opacity: 0.6;
   transform: none;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: var(--shadow-hard-sm);
 }
 
 /* Sticker Tilts */
@@ -135,46 +224,11 @@ body {
   animation: cursorBlink 0.9s infinite;
 }
 
-/* Custom Neo-Brutalist Scrollbars */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: #faf7f0;
-  border-left: 2px solid #000000;
-  border-top: 2px solid #000000;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #fde047;
-  border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #fb7185;
-}
-
-/* Top Scroll Progress Indicator */
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: #fb7185;
-  width: 0%;
-  z-index: 1000;
-  border-bottom: 1px solid #000000;
-  transition: width 0.08s ease-out;
-}
-
 /* Scroll-triggered reveal animation */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 .reveal-on-scroll.is-revealed {
@@ -197,33 +251,80 @@ body {
   right: 24px;
   z-index: 90;
   display: none;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 0;
-  background: #fde047;
-  color: #000000;
-  border: 3px solid #000000;
-  box-shadow: 4px 4px 0px #000000;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 1.15rem;
-  cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-#btn-back-to-top:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  background: var(--color-yellow);
+  color: var(--color-ink);
 }
 
 #btn-back-to-top.visible {
   display: flex;
 }
 
+/* Slide-out Student Profile Drawer */
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: none;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.drawer-content {
+  width: 100%;
+  max-width: 620px;
+  background: var(--color-paper);
+  border-left: 4px solid #000000;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: -8px 0px 0px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  animation: slideDrawer 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDrawer {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* Neo-Brutalist Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 120;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 580px;
+  background: var(--color-white);
+  border: 4px solid #000000;
+  box-shadow: var(--shadow-hard-xl);
+  padding: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 /* Print Styles */
 @media print {
-  .no-print, header, footer, #btn-back-to-top {
+  .no-print, header, footer, #btn-back-to-top, .drawer-backdrop, .modal-backdrop {
     display: none !important;
   }
 
