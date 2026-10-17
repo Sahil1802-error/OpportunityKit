@@ -1,0 +1,26 @@
+{
+  "name": "opportunitykit",
+  "version": "1.0.0",
+  "description": "OpportunityKit - The Readiness Runway. Student readiness evaluation against real opportunity requirements.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "opportunitykit",
+    "readiness-runway",
+    "internship",
+    "scholarship",
+    "student-readiness",
+    "sqlite"
+  ],
+  "author": "Team Solitude",
+  "license": "ISC",
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

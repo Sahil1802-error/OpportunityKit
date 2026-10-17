@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_standard" name="shell-type">
+  <title>OpportunityKit — Stop Getting Ghosted by Chaotic JDs</title>
+  <meta name="description" content="Turn chaotic 5-page JD pdfs into raw, actionable speedrun checklists. Unknown is never a failure — it's just convertible upside points.">
+
+  <!-- Google Fonts: Archivo Black, Space Grotesk, JetBrains Mono & Material Symbols -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Space+Grotesk:wght@500;700;900&amp;family=JetBrains+Mono:wght@500;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            paper: "#faf7f0",
+            yellow: { DEFAULT: "#fde047", 300: "#fde047", 400: "#facc15" },
+            lilac: { DEFAULT: "#c084fc", light: "#e9d5ff" },
+            mint: { DEFAULT: "#86efac", dark: "#22c55e" },
+            coral: { DEFAULT: "#fb7185", light: "#fecdd3" },
+            ink: "#000000"
+          },
+          fontFamily: {
+            display: ['"Archivo Black"', 'sans-serif'],
+            sans: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            hard: "4px 4px 0px #000000",
+            'hard-lg': "6px 6px 0px #000000",
+            'hard-xl': "8px 8px 0px #000000",
+            'hard-sm': "2px 2px 0px #000000"
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Neo-Brutalist Stylesheet & Custom Scroll Motion -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-paper text-ink font-sans antialiased min-h-screen selection:bg-yellow selection:text-ink">
+
+  <!-- Top Scroll Progress Line -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Sticky Top Header -->
+  <header class="sticky top-0 z-50 bg-paper neo-border-thick border-t-0 border-x-0 shadow-hard">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a class="flex items-center gap-2 group" href="#">
+          <div class="w-10 h-10 bg-yellow neo-border flex items-center justify-center font-display text-xl shadow-hard-sm group-hover:bg-mint transition-colors">⚡</div>
+          <span class="font-display text-xl sm:text-2xl tracking-tight text-ink uppercase">
+            OPPORTUNITY<span class="bg-coral text-white px-1 ml-0.5 border-2 border-black shadow-hard-sm">KIT</span>
+          </span>
+        </a>
+        <div class="hidden md:inline-flex items-center px-2.5 py-0.5 rounded-full bg-mint neo-border text-xs font-mono font-bold tracking-wider uppercase sticker-tilt-1">
+          💥 100% NO BS
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-3 font-mono font-bold text-xs">
+        <a class="px-3 py-1.5 bg-yellow neo-border shadow-hard-sm hover:bg-white transition-all uppercase" data-path="product-demo" href="#simulator-section">Demo Playground</a>
+        <a class="px-3 py-1.5 hover:bg-lilac neo-border border-transparent hover:border-black transition-all uppercase" data-path="readiness-runway" href="#action-runway-solutions">Runway Engine</a>
+        <a class="px-3 py-1.5 hover:bg-coral-light neo-border border-transparent hover:border-black transition-all uppercase" data-path="fix-ladder" href="#closest-win-section">Speedruns</a>
+        <a class="px-3 py-1.5 hover:bg-mint neo-border border-transparent hover:border-black transition-all uppercase" data-path="pricing" href="#pricing-section">Pricelist</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs font-black bg-white px-2.5 py-1 neo-border shadow-hard-sm">
+          <span></span>
+          <span class="text-lg leading-none inline-block drop-shadow-[1px_1px_0px_#000]">🇮🇳</span>
+        </span>
+        <button class="neo-btn bg-coral text-white font-mono font-black text-xs uppercase px-4 py-2 neo-border flex items-center gap-1.5" id="btn-hero-launch">
+          <span class="material-symbols-outlined text-[16px]">rocket_launch</span> SPEEDRUN NOW
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body Canvas with Pattern Grid -->
+  <main class="w-full pattern-grid pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col gap-10">
+
+      <!-- ===================================================================
+           HERO ZINE SECTION
+           =================================================================== -->
+      <section class="relative reveal-on-scroll">
+        <div class="absolute -top-4 -right-2 md:right-8 z-20 hidden sm:block sticker-tilt-2">
+          <div class="bg-lilac neo-border-thick p-3 shadow-hard font-display text-center uppercase leading-none">
+            <span class="text-xs font-mono font-bold block mb-1">AUTOMATED ATS AUDIT</span>
+            <span class="text-2xl text-white drop-shadow-[2px_2px_0px_#000]">FREE TIER<br>FOREVER</span>
+            <div class="mt-2 bg-yellow px-2 py-0.5 neo-border text-[11px] font-mono text-ink font-black">★ ZERO JUNK APPS ★</div>
+          </div>
+        </div>
+
+        <div class="bg-white neo-border-thick p-6 sm:p-10 shadow-hard-xl relative overflow-hidden">
+          <div class="inline-flex items-center gap-2 bg-yellow neo-border px-3 py-1 font-mono text-xs font-black uppercase mb-4 shadow-hard-sm sticker-tilt-1">
+            <span class="material-symbols-outlined text-[16px]">bolt</span> DETERMINISTIC ATS DECODER · NO AI HALLUCINATIONS
+          </div>
+
+          <div class="max-w-5xl">
+            <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.12] tracking-tight uppercase">
+              <span class="block">STOP GETTING <br>GHOSTED BY</span>
+              <span class="inline-flex items-center flex-wrap align-middle mt-2 mb-1">
+                <span class="bg-coral text-white px-3 sm:px-4 py-1 inline-block neo-border shadow-hard sticker-tilt-2 mr-2">
+                  <span class="text-white drop-shadow-[2px_2px_0px_#000]" id="typewriter-text"></span>
+                  <span aria-hidden="true" class="typewriter-cursor"></span>
+                </span>
+              </span>
+            </h1>
+          </div>
+
+          <div class="mt-6 pt-1 max-w-4xl">
+            <p class="font-sans font-bold text-lg sm:text-2xl text-ink leading-relaxed">
+              Turn chaotic 5-page JD pdfs into raw, actionable speedrun checklists.
+              <span class="inline-block mt-2 sm:mt-1 bg-mint px-2.5 py-0.5 neo-border font-black text-ink shadow-hard-sm">Unknown is never a failure</span>
+              <span class="inline-block sm:inline ml-1 font-bold text-ink/80">— it’s just convertible upside points.</span>
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 mt-8 pt-2">
+            <button class="neo-btn bg-yellow font-display text-base uppercase px-6 py-3 neo-border-thick flex items-center gap-2 text-ink" id="btn-load-sample">
+              <span class="material-symbols-outlined text-[22px]">smart_toy</span> LOAD B.TECH 2ND/3RD YR SAMPLE
+            </button>
+            <button class="neo-btn bg-white font-mono font-bold text-sm uppercase px-5 py-3 neo-border-thick flex items-center gap-2 hover:bg-paper" id="btn-custom-jd">
+              <span class="material-symbols-outlined text-[20px]">content_paste</span> PASTE RAW JD
+            </button>
+            <div class="flex items-center gap-1 bg-paper p-1 neo-border shadow-hard-sm">
+              <button class="opp-type-btn active px-3 py-1.5 font-mono text-xs font-bold uppercase bg-ink text-white" data-type="internship">Internship</button>
+              <button class="opp-type-btn px-3 py-1.5 font-mono text-xs font-bold uppercase hover:bg-yellow" data-type="scholarship">Scholarship</button>
+              <button class="opp-type-btn px-3 py-1.5 font-mono text-xs font-bold uppercase hover:bg-yellow" data-type="competition">Hackathon</button>
+            </div>
+          </div>
+
+          <!-- Hero Mini HUD Stats -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t-4 border-black">
+            <div class="bg-paper p-3 neo-border shadow-hard-sm">
+              <span class="font-mono text-xs font-bold text-ink/70 block uppercase">Current Baseline</span>
+              <span class="font-display text-3xl sm:text-4xl text-ink" id="metric-hero-floor">50%</span>
+              <span class="font-mono text-[11px] font-bold text-ink/60" id="metric-hero-floor-sub">3 of 6 Rules Verified</span>
+            </div>
+            <div class="bg-mint p-3 neo-border shadow-hard-sm">
+              <span class="font-mono text-xs font-bold text-ink/70 block uppercase">Max Ceiling</span>
+              <span class="font-display text-3xl sm:text-4xl text-ink" id="metric-hero-ceiling">83%</span>
+              <span class="font-mono text-[11px] font-bold text-ink" id="metric-hero-ceiling-sub">Convert 2 Unknowns</span>
+            </div>
+            <div class="bg-lilac p-3 neo-border shadow-hard-sm">
+              <span class="font-mono text-xs font-bold text-ink/70 block uppercase">Effort Sprint</span>
+              <span class="font-display text-2xl sm:text-3xl text-ink" id="metric-hero-sprint">5 DAYS</span>
+              <span class="font-mono text-[11px] font-bold text-ink" id="metric-hero-sprint-sub">vs 12 Day Deadline</span>
+            </div>
+            <div class="bg-yellow p-3 neo-border shadow-hard-sm flex flex-col justify-between">
+              <span class="font-mono text-xs font-bold text-ink/70 uppercase">Verdict</span>
+              <span class="font-display text-lg sm:text-xl uppercase bg-white px-2 py-0.5 neo-border inline-block mt-1" id="metric-hero-verdict">REACHABLE 🎯</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           INTERACTIVE NEO-BRUTALIST PLAYGROUND ENGINE (#1 THE LIVE UNIFIED SIMULATOR)
+           =================================================================== -->
+      <section class="flex flex-col gap-8 reveal-on-scroll" id="simulator-section">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-black text-yellow flex items-center justify-center font-display text-xl neo-border">#1</div>
+            <h2 class="font-display text-2xl sm:text-3xl uppercase tracking-tight">THE LIVE UNIFIED SIMULATOR</h2>
+          </div>
+          <div class="inline-flex items-center gap-2 bg-coral text-white font-mono font-bold text-xs px-3 py-1 neo-border shadow-hard-sm sticker-tilt-2" id="simulator-badge">
+            🔥 FINTECH SUMMER INTERN · CUTOFF IN 12 DAYS
+          </div>
+        </div>
+
+        <!-- 2-Column Playground: Left Input, Right Extracted Evidence -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Screen 1: Unstructured JD Panel (5 cols) -->
+          <div class="lg:col-span-5 bg-white neo-border-thick p-5 shadow-hard flex flex-col gap-4">
+            <div class="flex items-center justify-between border-b-2 border-black pb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-coral rounded-full neo-border"></span>
+                <span class="font-display text-base uppercase">1. RAW UNSTRUCTURED POST</span>
+              </div>
+              <button class="font-mono text-xs font-bold underline hover:text-coral flex items-center gap-1" id="btn-reset-text">
+                <span class="material-symbols-outlined text-[14px]">history</span> RESET
+              </button>
+            </div>
+            
+            <p class="font-mono text-xs font-bold text-ink/80">Paste any messy notification, PDF copy-paste, or LinkedIn blast:</p>
+            
+            <div class="relative">
+              <textarea class="w-full bg-paper neo-border p-3 font-mono text-xs font-semibold text-ink leading-relaxed focus:bg-white focus:outline-none focus:ring-0 resize-none shadow-hard-sm" id="jd-input" rows="6">Hiring Summer Interns: 2nd or 3rd-year B.Tech students (CSE/IT), minimum CGPA &gt;= 7.5. Required tech stack: HTML, CSS, JavaScript. Must submit Resume and Portfolio/GitHub link. Duration: 8 weeks full-time starting June 15th.</textarea>
+              <div class="absolute bottom-2 right-2 bg-yellow font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">DETERMINISTIC V4</div>
+            </div>
+
+            <!-- Candidate Snapshot -->
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-paper p-2 neo-border">
+                <span class="font-mono text-[10px] uppercase font-bold text-ink/60 block">Candidate Identity</span>
+                <span class="font-mono text-xs font-black" id="candidate-snapshot-name">Aarav S. (B.Tech 2nd Yr)</span>
+              </div>
+              <div class="bg-paper p-2 neo-border">
+                <span class="font-mono text-[10px] uppercase font-bold text-ink/60 block">Academic Record</span>
+                <span class="font-mono text-xs font-black text-mint-dark" id="candidate-snapshot-cgpa">8.2 / 10 CGPA [PASS]</span>
+              </div>
+            </div>
+
+            <button class="neo-btn bg-yellow text-ink font-display text-sm uppercase py-2.5 px-4 neo-border flex items-center justify-center gap-2 w-full shadow-hard" id="btn-run-compare">
+              <span class="material-symbols-outlined text-[18px]">rule</span> RE-EXTRACT ATOMIC CRITERIA
+            </button>
+          </div>
+
+          <!-- Screen 2: Evidence Checklist (7 cols) -->
+          <div class="lg:col-span-7 bg-white neo-border-thick p-5 shadow-hard flex flex-col gap-4">
+            <div class="flex items-center justify-between border-b-2 border-black pb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-mint rounded-full neo-border"></span>
+                <span class="font-display text-base uppercase">2. VERIFIABLE EVIDENCE AUDIT</span>
+              </div>
+              <span class="bg-paper px-2 py-0.5 neo-border font-mono text-xs font-bold" id="rules-count-pill">6 HARD RULES</span>
+            </div>
+
+            <!-- Rules Card List -->
+            <div class="flex flex-col gap-2.5 max-h-[380px] overflow-y-auto pr-1" id="evidence-cards-container">
+              <!-- Rule 1: Year of Study -->
+              <div class="p-2.5 bg-mint/30 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
+                <div class="flex items-center gap-2.5">
+                  <span class="font-display text-xl text-black">✓</span>
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase">Year of Study:</span>
+                    <span class="font-mono text-xs ml-1 bg-white px-1.5 py-0.5 neo-border">2nd or 3rd B.Tech</span>
+                    <p class="font-mono text-[11px] text-ink/70 italic">Evidence: "2nd or 3rd-year B.Tech students (CSE/IT)"</p>
+                  </div>
+                </div>
+                <span class="bg-mint text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase">VERIFIED</span>
+              </div>
+
+              <!-- Rule 2: Minimum CGPA -->
+              <div class="p-2.5 bg-mint/30 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
+                <div class="flex items-center gap-2.5">
+                  <span class="font-display text-xl text-black">✓</span>
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase">Minimum CGPA:</span>
+                    <span class="font-mono text-xs ml-1 bg-white px-1.5 py-0.5 neo-border">&gt;= 7.5 Cutoff</span>
+                    <p class="font-mono text-[11px] text-ink/70 italic">Evidence: "minimum CGPA &gt;= 7.5"</p>
+                  </div>
+                </div>
+                <span class="bg-mint text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase">VERIFIED</span>
+              </div>
+
+              <!-- Rule 3: Core Skills -->
+              <div class="p-2.5 bg-coral/20 neo-border flex items-center justify-between gap-3 shadow-hard-sm" id="evidence-skill-card">
+                <div class="flex items-center gap-2.5">
+                  <span class="font-display text-xl text-coral" id="evidence-skill-icon">✕</span>
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase">Core Skills:</span>
+                    <span class="font-mono text-xs ml-1 bg-white px-1.5 py-0.5 neo-border">HTML, CSS, JS</span>
+                    <p class="font-mono text-[11px] text-ink/70 italic">Evidence: "Required tech stack: HTML, CSS, JavaScript"</p>
+                  </div>
+                </div>
+                <span class="bg-coral text-white font-mono font-black text-xs px-2 py-0.5 neo-border uppercase" id="evidence-skill-badge">GAP: NO JS</span>
+              </div>
+
+              <!-- Rule 4: Resume Artifact -->
+              <div class="p-2.5 bg-mint/30 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
+                <div class="flex items-center gap-2.5">
+                  <span class="font-display text-xl text-black">✓</span>
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase">Resume Artifact:</span>
+                    <span class="font-mono text-xs ml-1 bg-white px-1.5 py-0.5 neo-border">PDF Upload</span>
+                    <p class="font-mono text-[11px] text-ink/70 italic">Evidence: "Must submit Resume"</p>
+                  </div>
+                </div>
+                <span class="bg-mint text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase">ON FILE</span>
+              </div>
+
+              <!-- Rule 5: Portfolio / GitHub -->
+              <div class="p-2.5 bg-yellow/40 neo-border flex items-center justify-between gap-3 shadow-hard-sm" id="evidence-github-card">
+                <div class="flex items-center gap-2.5">
+                  <span class="font-display text-xl text-ink" id="evidence-github-icon">?</span>
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase">Portfolio / GitHub:</span>
+                    <span class="font-mono text-xs ml-1 bg-white px-1.5 py-0.5 neo-border">Valid URL</span>
+                    <p class="font-mono text-[11px] text-ink/70 italic">Evidence: "Portfolio/GitHub link"</p>
+                  </div>
+                </div>
+                <span class="bg-yellow text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase" id="evidence-github-badge">MISSING LINK</span>
+              </div>
+
+              <!-- Rule 6: Full-Time Duration -->
+              <div class="p-2.5 bg-yellow/40 neo-border flex items-center justify-between gap-3 shadow-hard-sm" id="evidence-avail-card">
+                <div class="flex items-center gap-2.5">
+                  <span class="font-display text-xl text-ink" id="evidence-avail-icon">?</span>
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase">Full-Time Duration:</span>
+                    <span class="font-mono text-xs ml-1 bg-white px-1.5 py-0.5 neo-border">8 Wks from Jun 15</span>
+                    <p class="font-mono text-[11px] text-ink/70 italic">Evidence: "Duration: 8 weeks full-time starting June 15th"</p>
+                  </div>
+                </div>
+                <span class="bg-yellow text-ink font-mono font-black text-xs px-2 py-0.5 neo-border uppercase" id="evidence-avail-badge">UNCONFIRMED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-Column: Status Verdict Runway + Tactile What-If Checkboxes -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Screen 3: Runway & Score visualizer (7 Cols) -->
+          <div class="lg:col-span-7 bg-white neo-border-thick p-5 shadow-hard flex flex-col gap-5">
+            <div class="flex items-center justify-between border-b-2 border-black pb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-lilac rounded-full neo-border"></span>
+                <span class="font-display text-base uppercase">3. READINESS RUNWAY VERDICT</span>
+              </div>
+              <span class="bg-mint font-mono font-black text-xs px-2 py-0.5 neo-border">100% PROVABLE PROOF</span>
+            </div>
+
+            <!-- Dynamic Verdict Alert Box -->
+            <div class="p-4 bg-coral/20 neo-border-thick flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-hard-sm transition-all" id="verdict-banner">
+              <div class="flex items-start gap-3">
+                <div class="w-12 h-12 bg-coral text-white neo-border flex items-center justify-center font-display text-2xl shrink-0 shadow-hard-sm" id="verdict-icon-container">
+                  <span id="verdict-icon">⚠️</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-display text-lg uppercase" id="verdict-title">NOT READY TO APPLY YET</h3>
+                    <span class="bg-black text-white font-mono text-[10px] font-black px-1.5 py-0.5 uppercase" id="verdict-tag">BLOCKED</span>
+                  </div>
+                  <p class="font-mono text-xs font-bold text-ink mt-1" id="verdict-desc">JavaScript missing from candidate profile; Portfolio URL &amp; Availability unconfirmed.</p>
+                </div>
+              </div>
+              <button class="bg-paper text-ink/50 font-mono font-black text-xs uppercase px-3 py-2 neo-border cursor-not-allowed shrink-0" id="btn-packet-gen">
+                <span class="material-symbols-outlined text-[16px] inline-block align-middle">lock</span> ATS PACKET
+              </button>
+            </div>
+
+            <!-- Chunk Range Bar: Floor to Ceiling -->
+            <div class="bg-paper p-4 neo-border flex flex-col gap-3 shadow-hard-sm">
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-mono text-xs font-black uppercase">CHUNKY SCORE RUNWAY:</span>
+                <span class="bg-white px-2 py-0.5 neo-border font-mono text-xs font-black" id="score-summary-pill">3 MATCH · 1 GAP · 2 UNKNOWN</span>
+              </div>
+
+              <!-- Giant Visual Segmented Bar -->
+              <div class="w-full h-8 bg-white neo-border-thick p-1 flex overflow-hidden shadow-hard-sm">
+                <div class="bg-lilac h-full transition-all duration-300 neo-border-r" id="bar-floor" style="width: 50%;"></div>
+                <div class="bg-yellow h-full transition-all duration-300 pattern-dots" id="bar-ceiling" style="width: 33%;"></div>
+                <div class="bg-coral h-full transition-all duration-300" id="bar-gap" style="width: 17%;"></div>
+              </div>
+
+              <!-- Legend -->
+              <div class="grid grid-cols-3 gap-2 font-mono text-xs font-black pt-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-3.5 h-3.5 bg-lilac neo-border"></span>
+                  <span>Floor: <strong id="lbl-floor">50%</strong></span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-3.5 h-3.5 bg-yellow neo-border"></span>
+                  <span>Ceiling: <strong id="lbl-ceiling">83%</strong></span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-3.5 h-3.5 bg-coral neo-border"></span>
+                  <span>Hard Gaps: <strong id="lbl-gap">1 Item</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buffer timeline meter -->
+            <div class="bg-yellow/30 p-3 neo-border flex items-center justify-between gap-3 shadow-hard-sm">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[24px]">timer</span>
+                <div>
+                  <div class="font-mono text-xs font-black uppercase" id="runway-status-line">ESTIMATED ~5 DAYS EFFORT · 12 DAYS LEFT UNTIL CUTOFF</div>
+                  <div class="font-mono text-[11px] font-bold text-ink/70" id="runway-verdict-line">SLACK MARGIN: 7 SAFE DAYS TO CRUSH GAPS</div>
+                </div>
+              </div>
+              <span class="bg-mint font-mono font-black text-xs px-2.5 py-1 neo-border shadow-hard-sm uppercase" id="runway-badge">REACHABLE 🎯</span>
+            </div>
+          </div>
+
+          <!-- Screen 4: Tactile What-If Checkboxes (5 cols) -->
+          <div class="lg:col-span-5 bg-white neo-border-thick p-5 shadow-hard flex flex-col gap-4">
+            <div class="flex items-center justify-between border-b-2 border-black pb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-yellow rounded-full neo-border"></span>
+                <span class="font-display text-base uppercase">4. TACTILE CHEAT CODES</span>
+              </div>
+              <span class="bg-coral text-white font-mono font-black text-[10px] px-1.5 py-0.5 neo-border uppercase">WHAT-IF ENGINE</span>
+            </div>
+
+            <p class="font-mono text-xs font-bold text-ink">
+              Toggle candidate upgrades below. Watch your floor surge to 100% submit-readiness:
+            </p>
+
+            <!-- Giant Tactile Checkbox Cards -->
+            <div class="flex flex-col gap-3">
+              <!-- Toggle 1: JS -->
+              <label class="p-3 bg-paper hover:bg-yellow/20 neo-border flex items-center justify-between cursor-pointer shadow-hard-sm transition-all select-none">
+                <div class="flex items-center gap-3">
+                  <input class="w-6 h-6 neo-border bg-white text-black focus:ring-0 rounded-none cursor-pointer" id="toggle-js" type="checkbox">
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase block">"I know JavaScript basics"</span>
+                    <span class="font-mono text-[11px] text-ink/70 block">Bridges hard skill gap (~5 days sprint)</span>
+                  </div>
+                </div>
+                <span class="bg-coral text-white font-mono font-black text-[10px] px-1.5 py-0.5 neo-border uppercase">+17% UPSIDE</span>
+              </label>
+
+              <!-- Toggle 2: GitHub URL -->
+              <label class="p-3 bg-paper hover:bg-yellow/20 neo-border flex items-center justify-between cursor-pointer shadow-hard-sm transition-all select-none">
+                <div class="flex items-center gap-3">
+                  <input class="w-6 h-6 neo-border bg-white text-black focus:ring-0 rounded-none cursor-pointer" id="toggle-github" type="checkbox">
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase block">"Add Portfolio / GitHub Link"</span>
+                    <span class="font-mono text-[11px] text-ink/70 block">Converts unknown to valid URL (⚡ 5-min fix)</span>
+                  </div>
+                </div>
+                <span class="bg-yellow text-ink font-mono font-black text-[10px] px-1.5 py-0.5 neo-border uppercase">+17% UPSIDE</span>
+              </label>
+
+              <!-- Toggle 3: Availability -->
+              <label class="p-3 bg-paper hover:bg-yellow/20 neo-border flex items-center justify-between cursor-pointer shadow-hard-sm transition-all select-none">
+                <div class="flex items-center gap-3">
+                  <input class="w-6 h-6 neo-border bg-white text-black focus:ring-0 rounded-none cursor-pointer" id="toggle-avail" type="checkbox">
+                  <div>
+                    <span class="font-mono text-xs font-black uppercase block">"Confirm 8-Week Commitment"</span>
+                    <span class="font-mono text-[11px] text-ink/70 block">Clears schedule ambiguity (⚡ 5-min fix)</span>
+                  </div>
+                </div>
+                <span class="bg-yellow text-ink font-mono font-black text-[10px] px-1.5 py-0.5 neo-border uppercase">+16% UPSIDE</span>
+              </label>
+            </div>
+
+            <!-- 100% Celebration Banner -->
+            <div class="hidden p-4 bg-mint neo-border-thick shadow-hard flex flex-col gap-2 sticker-tilt-1" id="celebration-box">
+              <div class="flex items-center gap-2">
+                <span class="font-display text-2xl">🎉</span>
+                <span class="font-display text-lg uppercase">100% READY TO APPLY!</span>
+              </div>
+              <p class="font-mono text-xs font-black">All ATS parameters verified with bulletproof citations. You are ready to crush the interview pipeline.</p>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t-2 border-black">
+              <button class="font-mono text-xs font-black uppercase underline hover:text-coral" id="btn-toggle-all">Toggle All Upgrades</button>
+              <span class="font-mono text-xs font-bold bg-paper px-2 py-1 neo-border" id="lbl-toggle-count">0 of 3 Applied</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION #2: 12-DAY ACTION RUNWAY & SOLUTIONS MATRIX
+           =================================================================== -->
+      <section class="bg-white neo-border-thick p-6 shadow-hard flex flex-col gap-5 reveal-on-scroll" id="action-runway-solutions">
+        <div class="flex items-center justify-between flex-wrap gap-4 border-b-4 border-black pb-3">
+          <div>
+            <div class="inline-block bg-yellow font-mono text-[10px] font-black px-2 py-0.5 neo-border uppercase mb-1 shadow-hard-sm sticker-tilt-1">DEADLINE SPRINT MATRIX · FINTECH SUMMER INTERN</div>
+            <h3 class="font-display text-2xl sm:text-3xl uppercase">12-DAY ACTION RUNWAY &amp; SOLUTIONS MATRIX</h3>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="bg-coral text-white px-3 py-1 neo-border font-mono text-xs font-black uppercase shadow-hard-sm sticker-tilt-2">⏱️ 12 DAYS LEFT</span>
+            <span class="bg-mint text-ink px-3 py-1 neo-border font-mono text-xs font-black uppercase shadow-hard-sm">⚡ 5 DAYS EFFORT REQUIRED (+7 DAYS BUFFER)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Step 1 -->
+          <div class="bg-yellow/30 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-black text-yellow font-mono text-xs font-black px-2 py-0.5 neo-border">DAYS 1 - 2</span>
+                <span class="bg-yellow font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">⚡ 5-MIN FIXES</span>
+              </div>
+              <h4 class="font-display text-sm uppercase mt-1">ADMINISTRATIVE SPRINT</h4>
+              <p class="font-mono text-xs text-ink/80 font-bold">Clear both Unknowns immediately with zero tech friction:</p>
+              <div class="flex flex-col gap-2 mt-1">
+                <div class="bg-white p-2 neo-border flex flex-col gap-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-mono text-[11px] font-black uppercase">Portfolio / GitHub</span>
+                    <span class="bg-mint text-ink font-mono text-[9px] font-black px-1 neo-border">+17% UPSIDE</span>
+                  </div>
+                  <p class="font-mono text-[10px] text-ink/70">Link repo with clean README &amp; pinned live work.</p>
+                </div>
+                <div class="bg-white p-2 neo-border flex flex-col gap-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-mono text-[11px] font-black uppercase">8-Week Availability</span>
+                    <span class="bg-mint text-ink font-mono text-[9px] font-black px-1 neo-border">+16% UPSIDE</span>
+                  </div>
+                  <p class="font-mono text-[10px] text-ink/70">Provide signed college NOC / availability attestation.</p>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-black pt-2 flex items-center justify-between">
+              <span class="font-mono text-[10px] font-black text-ink/70 uppercase">Effort: &lt; 20 Mins</span>
+              <span class="bg-mint text-ink font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">CLEARS 2 UNKNOWNS</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-lilac/30 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-black text-lilac font-mono text-xs font-black px-2 py-0.5 neo-border">DAYS 3 - 7</span>
+                <span class="bg-lilac text-white font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">📅 CORE SPRINT</span>
+              </div>
+              <h4 class="font-display text-sm uppercase mt-1">JAVASCRIPT INTENSIVE</h4>
+              <p class="font-mono text-xs text-ink/80 font-bold">5-day micro-sprint (90 min/day) to bridge mandatory skill gap:</p>
+              <div class="flex flex-col gap-1.5 mt-1">
+                <div class="bg-white p-1.5 neo-border flex items-center justify-between">
+                  <span class="font-mono text-[10px] font-black uppercase">Day 3: DOM &amp; Events</span>
+                  <span class="font-mono text-[9px] bg-paper px-1 neo-border font-bold">90m</span>
+                </div>
+                <div class="bg-white p-1.5 neo-border flex items-center justify-between">
+                  <span class="font-mono text-[10px] font-black uppercase">Day 4: ES6 &amp; Async/Await</span>
+                  <span class="font-mono text-[9px] bg-paper px-1 neo-border font-bold">90m</span>
+                </div>
+                <div class="bg-white p-1.5 neo-border flex items-center justify-between">
+                  <span class="font-mono text-[10px] font-black uppercase">Day 5: Fetch API &amp; JSON</span>
+                  <span class="font-mono text-[9px] bg-paper px-1 neo-border font-bold">90m</span>
+                </div>
+                <div class="bg-white p-1.5 neo-border flex items-center justify-between">
+                  <span class="font-mono text-[10px] font-black uppercase">Days 6-7: Mini REST Widget</span>
+                  <span class="font-mono text-[9px] bg-paper px-1 neo-border font-bold">180m</span>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-black pt-2 flex items-center justify-between">
+              <span class="font-mono text-[10px] font-black text-ink/70 uppercase">Effort: 5 Full Days</span>
+              <span class="bg-coral text-white font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">BRIDGES JS GAP</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-mint/30 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-black text-mint font-mono text-xs font-black px-2 py-0.5 neo-border">DAYS 8 - 10</span>
+                <span class="bg-mint text-ink font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">🛠️ PROOF POLISH</span>
+              </div>
+              <h4 class="font-display text-sm uppercase mt-1">ATS PROOF-OF-WORK</h4>
+              <p class="font-mono text-xs text-ink/80 font-bold">Package verifiable artifacts for deterministic screening:</p>
+              <div class="flex flex-col gap-2 mt-1">
+                <div class="bg-white p-2 neo-border flex flex-col gap-1">
+                  <span class="font-mono text-[11px] font-black uppercase">Deploy Live Demo</span>
+                  <p class="font-mono text-[10px] text-ink/70">Deploy widget on Vercel/Netlify with 1-click test link.</p>
+                </div>
+                <div class="bg-white p-2 neo-border flex flex-col gap-1">
+                  <span class="font-mono text-[11px] font-black uppercase">Resume Keyword Tuning</span>
+                  <p class="font-mono text-[10px] text-ink/70">Rewrite bullet with exact string 'HTML, CSS, JavaScript'.</p>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-black pt-2 flex items-center justify-between">
+              <span class="font-mono text-[10px] font-black text-ink/70 uppercase">Effort: 2 Days</span>
+              <span class="bg-mint text-ink font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">100% AUDIT READY</span>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-paper neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-black text-white font-mono text-xs font-black px-2 py-0.5 neo-border">DAYS 11 - 12</span>
+                <span class="bg-yellow font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">🛡️ SAFE BUFFER</span>
+              </div>
+              <h4 class="font-display text-sm uppercase mt-1">PRE-FLIGHT DRY-RUN</h4>
+              <p class="font-mono text-xs text-ink/80 font-bold">Zero panic submit window before official ATS cutoff:</p>
+              <div class="bg-white p-2.5 neo-border mt-1 flex flex-col gap-1.5">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-mint-dark font-black">✓</span>
+                  <span class="font-mono text-[10px] font-bold">Deterministic verification re-test</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-mint-dark font-black">✓</span>
+                  <span class="font-mono text-[10px] font-bold">Export finalized ATS packet PDF</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-mint-dark font-black">✓</span>
+                  <span class="font-mono text-[10px] font-bold">Submit with +48h margin to spare</span>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-black pt-2 flex items-center justify-between">
+              <span class="font-mono text-[10px] font-black text-mint-dark uppercase">Buffer: 48h Safe Zone</span>
+              <span class="bg-black text-white font-mono text-[10px] font-black px-1.5 py-0.5 neo-border">ZERO RISK</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION #3: CLOSEST WIN MULTI-OPPORTUNITY RANKING
+           =================================================================== -->
+      <section class="bg-white neo-border-thick p-6 sm:p-8 shadow-hard-xl flex flex-col gap-6 reveal-on-scroll" id="closest-win-section">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-4 border-black pb-4">
+          <div>
+            <div class="inline-block bg-yellow font-mono text-xs font-black px-2 py-0.5 neo-border uppercase mb-2 shadow-hard-sm sticker-tilt-1">PORTFOLIO ROI ENGINE</div>
+            <h2 class="font-display text-3xl sm:text-4xl uppercase">CLOSEST WIN MULTI-OPPORTUNITY <br>RANKING</h2>
+            <p class="font-mono text-xs sm:text-sm font-bold text-ink/80 mt-1 max-w-2xl">
+              Never spam 200 random applications. Rank targets by highest ceiling conversion efficiency and zero fatal locks.
+            </p>
+          </div>
+          <button class="neo-btn bg-paper font-mono font-black text-xs uppercase px-4 py-2.5 neo-border self-start md:self-auto flex items-center gap-2 shadow-hard-sm">
+            <span class="material-symbols-outlined text-[16px]">add_circle</span> ADD TARGET OP
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Target 1 -->
+          <div class="bg-yellow/20 neo-border-thick p-5 shadow-hard flex flex-col justify-between relative sticker-tilt-1">
+            <div class="absolute -top-3.5 left-4 bg-coral text-white neo-border px-3 py-0.5 font-mono text-xs font-black uppercase shadow-hard-sm">★ RANK #1: INSTANT WIN</div>
+            <div class="flex flex-col gap-3 mt-2">
+              <div class="flex items-center justify-between border-b-2 border-black pb-2">
+                <span class="font-mono text-xs font-black uppercase">Fintech Corp</span>
+                <span class="font-display text-xl">83% CEILING</span>
+              </div>
+              <h4 class="font-display text-xl uppercase">FRONTEND INTERN (REACT)</h4>
+              <p class="font-mono text-xs font-bold text-ink/80">Stipend: ₹45,000/mo · Remote · 8 Wks</p>
+              <div class="bg-white p-3 neo-border flex flex-col gap-2 shadow-hard-sm">
+                <div class="flex items-center justify-between font-mono text-xs font-bold">
+                  <span>Effort to 100%</span>
+                  <span class="bg-mint px-1.5 py-0.2 neo-border font-black">5 DAYS</span>
+                </div>
+                <div class="w-full bg-paper h-3 neo-border overflow-hidden">
+                  <div class="bg-coral h-full" style="width: 83%;"></div>
+                </div>
+                <div class="flex items-center justify-between font-mono text-[10px] font-bold">
+                  <span>Locked Stops:</span>
+                  <span class="text-mint-dark font-black">0 (CLEARED)</span>
+                </div>
+              </div>
+            </div>
+            <button class="neo-btn bg-coral text-white font-display text-sm uppercase py-2.5 px-4 neo-border mt-5 shadow-hard" id="btn-focus-runway">
+              FOCUS RUNWAY ON #1
+            </button>
+          </div>
+
+          <!-- Target 2 -->
+          <div class="bg-paper neo-border-thick p-5 shadow-hard flex flex-col justify-between">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between border-b-2 border-black pb-2">
+                <span class="font-mono text-xs font-black uppercase">Grace Hopper Trust</span>
+                <span class="font-display text-xl">60% CEILING</span>
+              </div>
+              <div>
+                <span class="bg-yellow font-mono text-[10px] font-black px-1.5 py-0.5 neo-border uppercase">RANK #2 BACKUP</span>
+                <h4 class="font-display text-xl uppercase mt-1">TRAVEL SCHOLARSHIP</h4>
+              </div>
+              <p class="font-mono text-xs font-bold text-ink/80">Grant: $2,500 travel + conference pass</p>
+              <div class="bg-white p-3 neo-border flex flex-col gap-2 shadow-hard-sm">
+                <div class="flex items-center justify-between font-mono text-xs font-bold">
+                  <span>Effort to 100%</span>
+                  <span class="bg-yellow px-1.5 py-0.2 neo-border font-black">10 DAYS</span>
+                </div>
+                <div class="w-full bg-paper h-3 neo-border overflow-hidden">
+                  <div class="bg-yellow h-full" style="width: 60%;"></div>
+                </div>
+                <div class="flex items-center justify-between font-mono text-[10px] font-bold">
+                  <span>Pending:</span>
+                  <span class="font-black">2 LOR letters</span>
+                </div>
+              </div>
+            </div>
+            <button class="neo-btn bg-white font-display text-sm uppercase py-2.5 px-4 neo-border mt-5 shadow-hard hover:bg-yellow">
+              TRACK BACKUP
+            </button>
+          </div>
+
+          <!-- Target 3 -->
+          <div class="bg-paper neo-border p-5 shadow-hard flex flex-col justify-between opacity-60">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between border-b-2 border-black pb-2">
+                <span class="font-mono text-xs font-black uppercase text-ink/70">Govt AI Council</span>
+                <span class="font-display text-xl text-coral">40% CEILING</span>
+              </div>
+              <div>
+                <span class="bg-coral text-white font-mono text-[10px] font-black px-1.5 py-0.5 neo-border uppercase">HARD STOP: SKIP</span>
+                <h4 class="font-display text-xl uppercase mt-1">NATIONAL HACKATHON</h4>
+              </div>
+              <p class="font-mono text-xs font-bold text-ink/70">Cash Pool: ₹10,00,000 · 4th Yr Only</p>
+              <div class="bg-white p-3 neo-border flex flex-col gap-2">
+                <div class="flex items-center justify-between font-mono text-xs font-bold text-coral">
+                  <span>Hard Block</span>
+                  <span>4TH YR ONLY</span>
+                </div>
+                <div class="w-full bg-paper h-3 neo-border overflow-hidden">
+                  <div class="bg-coral h-full" style="width: 40%;"></div>
+                </div>
+                <p class="font-mono text-[10px] text-ink/60">Candidate is in 2nd year. Automatic ATS drop.</p>
+              </div>
+            </div>
+            <button class="bg-paper font-mono text-xs font-black uppercase py-2.5 px-4 neo-border mt-5 cursor-not-allowed">
+              ARCHIVED / DO NOT APPLY
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION #4: 4 HIGH-VELOCITY REVENUE STREAMS
+           =================================================================== -->
+      <section class="bg-white neo-border-thick p-6 sm:p-8 shadow-hard-xl flex flex-col gap-6 reveal-on-scroll" id="pricing-section">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-4 border-black pb-4">
+          <div>
+            <div class="inline-block bg-mint font-mono text-xs font-black px-2 py-0.5 neo-border uppercase mb-2 shadow-hard-sm sticker-tilt-2">SUSTAINABLE UNIT ECONOMICS</div>
+            <h2 class="font-display text-3xl sm:text-4xl uppercase">4 HIGH-VELOCITY REVENUE <br>STREAMS</h2>
+            <p class="font-mono text-xs sm:text-sm font-bold text-ink/80 mt-1 max-w-2xl">
+              Low CAC viral student acquisition subsidizes high LTV college and recruiter licensing.
+            </p>
+          </div>
+          <div class="bg-yellow neo-border p-3 shadow-hard-sm font-mono text-xs font-black uppercase">
+            TARGET FY25 ARR: <span class="bg-black text-yellow px-1.5 py-0.5 ml-1">₹1.84 CR ($220K USD)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Tier 1 -->
+          <div class="bg-paper neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-white px-2 py-0.5 neo-border font-mono text-[10px] font-black uppercase">FREEMIUM</span>
+                <span class="font-display text-2xl">₹0</span>
+              </div>
+              <h4 class="font-display text-lg uppercase">VIRAL MAGNET</h4>
+              <p class="font-mono text-xs text-ink/80">3 Opportunity scans / mo. Verbatim proof logs. Basic runway range.</p>
+            </div>
+            <span class="font-mono text-[10px] font-black uppercase bg-white p-1 neo-border text-center">TARGET: 250,000 MAU</span>
+          </div>
+
+          <!-- Tier 2 -->
+          <div class="bg-lilac neo-border-thick p-4 shadow-hard flex flex-col justify-between gap-3 sticker-tilt-1">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-white px-2 py-0.5 neo-border font-mono text-[10px] font-black uppercase">STUDENT PRO</span>
+                <span class="font-display text-2xl">₹49<span class="text-xs font-mono font-bold">/MO</span></span>
+              </div>
+              <h4 class="font-display text-lg uppercase text-white drop-shadow-[1px_1px_0px_#000]">UNLIMITED POWER</h4>
+              <p class="font-mono text-xs font-bold text-black">Unlimited JD scans, Closest Win ranking, automated cutoff SMS alerts.</p>
+            </div>
+            <span class="font-mono text-[10px] font-black uppercase bg-yellow p-1 neo-border text-center">OR ₹299/YR (65% MARGIN)</span>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="bg-mint/40 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-mint px-2 py-0.5 neo-border font-mono text-[10px] font-black uppercase">B2B CAMPUS</span>
+                <span class="font-display text-xl">₹25k-50k<span class="text-xs font-mono font-bold">/yr</span></span>
+              </div>
+              <h4 class="font-display text-lg uppercase">PLACEMENT OS</h4>
+              <p class="font-mono text-xs text-ink/80">Aggregated batch readiness cockpit. Triage unplaced students before campus drives.</p>
+            </div>
+            <span class="font-mono text-[10px] font-black uppercase bg-white p-1 neo-border text-center">PER CAMPUS / YEAR</span>
+          </div>
+
+          <!-- Tier 4 -->
+          <div class="bg-yellow/40 neo-border p-4 shadow-hard-sm flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="bg-coral text-white px-2 py-0.5 neo-border font-mono text-[10px] font-black uppercase">RECRUITERS</span>
+                <span class="font-display text-xl">₹999<span class="text-xs font-mono font-bold">/post</span></span>
+              </div>
+              <h4 class="font-display text-lg uppercase">CHECKLIST ADS</h4>
+              <p class="font-mono text-xs text-ink/80">Turn noisy hiring posts into ATS-vetted criteria. Zero garbage applicants.</p>
+            </div>
+            <span class="font-mono text-[10px] font-black uppercase bg-white p-1 neo-border text-center">ENTERPRISE RECRUITERS</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Floating Back to Top Button -->
+  <button id="btn-back-to-top" aria-label="Back to top" title="Scroll to top">
+    ↑
+  </button>
+
+  <!-- Neo-Brutalist Footer -->
+  <footer class="w-full bg-paper neo-border-thick border-b-0 border-x-0 py-8 shadow-hard">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-yellow neo-border flex items-center justify-center font-display text-sm">⚡</div>
+        <span class="font-display text-sm uppercase">OPPORTUNITYKIT // ZERO RESUME GHOSTING</span>
+        <span class="font-mono text-xs text-ink/70">© 2026</span>
+      </div>
+      <div class="flex items-center gap-4 font-mono text-xs font-black uppercase">
+        <a class="hover:underline" href="#action-runway-solutions">Speedrun Rules</a>
+        <a class="hover:underline" href="#pricing-section">College Licenses</a>
+        <a class="hover:underline" href="#pricing-section">No AI BS Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Modules in Dependency Order -->
+  <script src="samples.js"></script>
+  <script src="effort.js"></script>
+  <script src="score.js"></script>
+  <script src="compare.js"></script>
+  <script src="extract.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

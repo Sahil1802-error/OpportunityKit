@@ -1,0 +1,8 @@
+node_modules/
+opportunitykit.db
+*.db
+tests/*.db
+.env
+uploads/
+npm-debug.log*
+.vercel
