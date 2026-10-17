@@ -411,6 +411,8 @@
     const rw = state.runwayData;
     if (!s) return;
 
+    const mismatchCount = state.results.filter(r => r.status === 'MISMATCH').length;
+
     // Mini HUD updates
     if (el.metricHeroFloor) el.metricHeroFloor.textContent = `${s.floor}%`;
     if (el.metricHeroFloorSub) el.metricHeroFloorSub.textContent = `${s.matches} of ${s.total} Rules Verified`;
@@ -441,7 +443,6 @@
 
     if (el.lblFloor) el.lblFloor.textContent = `${s.floor}%`;
     if (el.lblCeiling) el.lblCeiling.textContent = `${s.ceiling}%`;
-    const mismatchCount = state.results.filter(r => r.status === 'MISMATCH').length;
     if (el.lblGap) el.lblGap.textContent = `${mismatchCount} Item${mismatchCount === 1 ? '' : 's'}`;
 
     if (el.scoreSummaryPill) {
