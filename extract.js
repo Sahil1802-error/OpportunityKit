@@ -17,7 +17,7 @@
   }
 })(typeof self !== 'undefined' ? self : this, function () {
 
-  // Known skill tokens to scan for in text (comprehensive tech dictionary)
+  // Known skill tokens to scan for in text (comprehensive industry dictionary)
   const SKILL_KEYWORDS = [
     "JavaScript", "TypeScript", "Python", "Java", "C++", "C#", "Go", "Rust", "Ruby", "PHP",
     "HTML", "CSS", "React", "Next.js", "Angular", "Vue", "Node.js", "Express", "Django", "Flask",
@@ -29,7 +29,9 @@
     "Communication", "Teamwork", "Analytical Skills", "OOP", "Object Oriented Programming",
     "Data Science", "Deep Learning", "Computer Vision", "Pandas", "NumPy", "TensorFlow", "PyTorch",
     "Android", "iOS", "Cloud Computing", "DevOps", "CI/CD", "Testing", "Unit Testing",
-    "Microservices", "RESTful APIs", "UI/UX", "System Design", "Excel"
+    "Microservices", "RESTful APIs", "UI/UX", "System Design", "Excel", "Power BI", "Tableau",
+    "Kafka", "Elasticsearch", "Spark", "Hadoop", "Scikit-Learn", "OpenCV", "ROS",
+    "Linux/Unix", "Cybersecurity", "Blockchain", "Solidity", "Matlab", "R", "Dart"
   ];
 
   /**
@@ -175,9 +177,9 @@
         if (d) detectedDeadline = d;
       }
 
-      // --- 2. Eligibility: Year of study ---
-      if (!extractedFields.has('year') && (lower.includes('year') || lower.includes('undergraduate') || lower.includes('final year'))) {
-        // e.g. "2nd or 3rd year", "second or third year", "third year", "2nd-year", "final year"
+      // --- 2. Eligibility: Year of study / Graduation Batch ---
+      if (!extractedFields.has('year') && (lower.includes('year') || lower.includes('undergraduate') || lower.includes('final year') || lower.includes('graduating') || lower.includes('batch'))) {
+        // e.g. "2nd or 3rd year", "second or third year", "third year", "2nd-year", "final year", "graduating in 2026", "2026 or 2027 batch"
         let years = null;
         let label = "Year of study";
 
@@ -196,6 +198,18 @@
         } else if (lower.includes('1st year') || lower.includes('first year')) {
           years = [1];
           label = "Year of study (1st year)";
+        } else if (lower.includes('2026') && lower.includes('2027')) {
+          years = [2, 3];
+          label = "Graduation Batch (2026 / 2027)";
+        } else if (lower.includes('2026')) {
+          years = [3];
+          label = "Graduation Batch (2026)";
+        } else if (lower.includes('2027')) {
+          years = [2];
+          label = "Graduation Batch (2027)";
+        } else if (lower.includes('2025')) {
+          years = [4];
+          label = "Graduation Batch (2025)";
         }
 
         if (years) {
@@ -219,12 +233,78 @@
         }
       }
 
-      // --- 3. Eligibility: CGPA / GPA cutoff ---
-      if (!extractedFields.has('cgpa') && (lower.includes('cgpa') || lower.includes('gpa') || lower.includes('marks'))) {
+      // --- 2b. Eligibility: Degree / Qualification ---
+      if (!extractedFields.has('degree') && (lower.includes('degree') || lower.includes('b.tech') || lower.includes('btech') || lower.includes('b.e') || lower.includes('m.tech') || lower.includes('mtech') || lower.includes('bca') || lower.includes('mca') || lower.includes('b.sc') || lower.includes('bsc') || lower.includes('bba') || lower.includes('mba') || lower.includes('bachelor') || lower.includes('master'))) {
+        const degreeMatches = [];
+        if (/\b(b\.?tech|b\.?e\.?|bachelor(?:'s)?(?:\s+of\s+(?:technology|engineering))?)\b/i.test(s)) degreeMatches.push("B.Tech");
+        if (/\b(bca|bachelor(?:'s)?\s+of\s+computer\s+applications)\b/i.test(s)) degreeMatches.push("BCA");
+        if (/\b(m\.?tech|master(?:'s)?(?:\s+of\s+(?:technology|engineering))?)\b/i.test(s)) degreeMatches.push("M.Tech");
+        if (/\b(mca|master(?:'s)?\s+of\s+computer\s+applications)\b/i.test(s)) degreeMatches.push("MCA");
+        if (/\b(b\.?sc|bsc)\b/i.test(s)) degreeMatches.push("B.Sc");
+        if (/\b(m\.?sc|msc)\b/i.test(s)) degreeMatches.push("M.Sc");
+
+        if (degreeMatches.length > 0) {
+          extractedFields.add('degree');
+          requirements.push({
+            id: generateReqId('degree', idx),
+            category: "eligibility",
+            field: "degree",
+            label: `Required Degree (${degreeMatches.join(' or ')})`,
+            rule: "one_of",
+            value: degreeMatches,
+            unit: "degree",
+            required: true,
+            evidence: s,
+            confidence: "high",
+            effortType: "locked",
+            estimatedDays: null,
+            locked: true,
+            active: true
+          });
+        }
+      }
+
+      // --- 2c. Eligibility: Academic Branch / Discipline ---
+      if (!extractedFields.has('branch') && (lower.includes('computer science') || lower.includes('cse') || lower.includes('information technology') || lower.includes('\bit\b') || lower.includes('electronics') || lower.includes('ece') || lower.includes('electrical') || lower.includes('mechanical') || lower.includes('data science') || lower.includes('artificial intelligence'))) {
+        const branchMatches = [];
+        if (/\b(computer science|cse|cs)\b/i.test(s)) branchMatches.push("CSE");
+        if (/\b(information technology|it)\b/i.test(s)) branchMatches.push("IT");
+        if (/\b(electronics|ece|electronics and communication)\b/i.test(s)) branchMatches.push("ECE");
+        if (/\b(electrical|ee)\b/i.test(s)) branchMatches.push("EE");
+        if (/\b(mechanical|me)\b/i.test(s)) branchMatches.push("ME");
+        if (/\b(data science|ai|artificial intelligence)\b/i.test(s)) branchMatches.push("Data Science");
+
+        if (branchMatches.length > 0) {
+          extractedFields.add('branch');
+          requirements.push({
+            id: generateReqId('branch', idx),
+            category: "eligibility",
+            field: "branch",
+            label: `Eligible Branch (${branchMatches.join(' / ')})`,
+            rule: "one_of",
+            value: branchMatches,
+            unit: "branch",
+            required: true,
+            evidence: s,
+            confidence: "high",
+            effortType: "locked",
+            estimatedDays: null,
+            locked: true,
+            active: true
+          });
+        }
+      }
+
+      // --- 3. Eligibility: CGPA / GPA / Percentage cutoff ---
+      if (!extractedFields.has('cgpa') && (lower.includes('cgpa') || lower.includes('gpa') || lower.includes('marks') || lower.includes('%') || lower.includes('percentage'))) {
         // Matches: "CGPA: 8.0", "CGPA of at least 7.0", "CGPA >= 7.5", "minimum CGPA of 7.5", "7.5+ CGPA", "CGPA 7.0/10"
         const cgpaMatch = s.match(/(?:cgpa|gpa|sgpa|marks)\s*(?:of\s+at\s+least|at\s+least|of\s+minimum|minimum\s+of|of|is|minimum|cutoff)?\s*(?:[:=]|>=|>)?\s*([0-9](?:\.[0-9]{1,2})?)/i) ||
                           s.match(/(?:minimum|at\s+least|cutoff|score\s+of)\s*[:=]?\s*([0-9](?:\.[0-9]{1,2})?)\s*(?:\+)?\s*(?:cgpa|gpa|sgpa|marks)/i) ||
                           s.match(/\b([0-9]\.[0-9]{1,2})\s*(?:\+)?\s*(?:cgpa|gpa|sgpa)\b/i);
+        
+        // Also check percentage e.g. "minimum 70%", "70% throughout", ">= 60%"
+        const pctMatch = !cgpaMatch ? (s.match(/(?:minimum|at\s+least|of|score\s+of|with)?\s*([5-9][0-9](?:\.[0-9]+)?)\s*%/i) || s.match(/([5-9][0-9])\s*%\s*(?:in|marks|percentage|cutoff|throughout)/i)) : null;
+
         if (cgpaMatch) {
           const cutoff = parseFloat(cgpaMatch[1]);
           if (!isNaN(cutoff) && cutoff > 0 && cutoff <= 10) {
@@ -236,6 +316,29 @@
               label: `Minimum CGPA cutoff (${cutoff}+)`,
               rule: "min",
               value: cutoff,
+              unit: "cgpa",
+              required: true,
+              evidence: s,
+              confidence: "high",
+              effortType: "locked",
+              estimatedDays: null,
+              locked: true,
+              active: true
+            });
+          }
+        } else if (pctMatch) {
+          const pctVal = parseFloat(pctMatch[1]);
+          if (!isNaN(pctVal) && pctVal >= 40 && pctVal <= 100) {
+            // Normalize percentage to approximate 10-point scale: 70% -> 7.0
+            const approxCgpa = parseFloat((pctVal / 10).toFixed(1));
+            extractedFields.add('cgpa');
+            requirements.push({
+              id: generateReqId('cgpa', idx),
+              category: "eligibility",
+              field: "cgpa",
+              label: `Academic cutoff (${pctVal}% / ${approxCgpa} CGPA)`,
+              rule: "min",
+              value: approxCgpa,
               unit: "cgpa",
               required: true,
               evidence: s,
@@ -492,18 +595,103 @@
         });
       }
 
-      // --- 8. Links extraction (Portfolio / GitHub) ---
-      if (!extractedFields.has('links') && !extractedFields.has('repository')) {
-        const hasPortfolio = lower.includes('portfolio');
-        const hasGithub = lower.includes('github');
+      // Recommendation letter / LOR
+      if (!extractedFields.has('recommendation') && (lower.includes('recommendation letter') || lower.includes('letter of recommendation') || lower.includes('\blor\b') || lower.includes('reference letter'))) {
+        extractedFields.add('recommendation');
+        requirements.push({
+          id: generateReqId('recommendation', idx),
+          category: "documents",
+          field: "recommendation",
+          label: "Letter of Recommendation (LOR)",
+          rule: "present",
+          value: true,
+          unit: null,
+          required: true,
+          evidence: s,
+          confidence: "high",
+          effortType: "days",
+          estimatedDays: 4,
+          locked: false,
+          active: true
+        });
+      }
 
-        if (hasPortfolio && hasGithub) {
+      // College ID Card / Student ID
+      if (!extractedFields.has('college_id') && (lower.includes('college id') || lower.includes('student id') || lower.includes('identity card') || lower.includes('enrollment proof'))) {
+        extractedFields.add('college_id');
+        requirements.push({
+          id: generateReqId('college_id', idx),
+          category: "documents",
+          field: "college_id",
+          label: "Valid College / Student ID Card",
+          rule: "present",
+          value: true,
+          unit: null,
+          required: true,
+          evidence: s,
+          confidence: "high",
+          effortType: "quick",
+          estimatedDays: 0,
+          locked: false,
+          active: true
+        });
+      }
+
+      // Cover Letter
+      if (!extractedFields.has('cover_letter') && (lower.includes('cover letter') || lower.includes('motivation letter'))) {
+        extractedFields.add('cover_letter');
+        requirements.push({
+          id: generateReqId('cover_letter', idx),
+          category: "documents",
+          field: "cover_letter",
+          label: "Tailored Cover Letter",
+          rule: "present",
+          value: true,
+          unit: null,
+          required: true,
+          evidence: s,
+          confidence: "high",
+          effortType: "days",
+          estimatedDays: 1,
+          locked: false,
+          active: true
+        });
+      }
+
+      // Certificates / Course completion
+      if (!extractedFields.has('certificate') && (lower.includes('course certificate') || lower.includes('completion certificate') || lower.includes('certifications required') || lower.includes('certified'))) {
+        extractedFields.add('certificate');
+        requirements.push({
+          id: generateReqId('certificate', idx),
+          category: "documents",
+          field: "certificate",
+          label: "Relevant Course / Skill Certificate",
+          rule: "present",
+          value: true,
+          unit: null,
+          required: true,
+          evidence: s,
+          confidence: "high",
+          effortType: "days",
+          estimatedDays: 2,
+          locked: false,
+          active: true
+        });
+      }
+
+      // --- 8. Links extraction (Portfolio / GitHub / LinkedIn) ---
+      if (!extractedFields.has('links') && !extractedFields.has('repository')) {
+        const hasPortfolio = lower.includes('portfolio') || lower.includes('personal site') || lower.includes('website');
+        const hasGithub = lower.includes('github') || lower.includes('gitlab') || lower.includes('bitbucket');
+        const hasLinkedin = lower.includes('linkedin');
+
+        if ((hasPortfolio || hasLinkedin) && hasGithub) {
           extractedFields.add('links');
           requirements.push({
             id: generateReqId('links', idx),
             category: "links",
             field: "links",
-            label: "Portfolio or GitHub Profile",
+            label: "Proof of Work (Portfolio or GitHub)",
             rule: "has_any",
             value: ["portfolio", "github"],
             unit: null,
@@ -542,6 +730,24 @@
             label: "GitHub Profile URL",
             rule: "url",
             value: true,
+            unit: null,
+            required: true,
+            evidence: s,
+            confidence: "high",
+            effortType: "quick",
+            estimatedDays: 0,
+            locked: false,
+            active: true
+          });
+        } else if (hasLinkedin && (lower.includes('profile') || lower.includes('link') || lower.includes('url') || lower.includes('submit') || lower.includes('provide'))) {
+          extractedFields.add('links');
+          requirements.push({
+            id: generateReqId('linkedin', idx),
+            category: "links",
+            field: "links",
+            label: "LinkedIn Profile URL",
+            rule: "has_any",
+            value: ["portfolio", "github"],
             unit: null,
             required: true,
             evidence: s,
@@ -659,93 +865,78 @@
       }
     }
 
-    // --- SMART GENERAL FALLBACK EXTRACTOR ---
-    // If no specific structured criteria were extracted, but the user supplied text,
-    // decompose text sentences or bullet points into active actionable criteria so
-    // the user NEVER receives an empty 0-score verdict!
-    if (requirements.length === 0 && text && text.trim().length > 10) {
-      const meaningfulLines = sentences.filter(s => {
-        const l = s.trim().toLowerCase();
-        return l.length > 15 && !l.startsWith('about us') && !l.startsWith('copyright') && !l.startsWith('all rights');
+    // --- 11. SUPPLEMENTAL ACTIONABLE SENTENCE EXTRACTOR ---
+    // If the opportunity description contains specific requirement lines that weren't captured by 
+    // the standard structured rules (e.g. "Recommendation letter from professor", "Valid driving license", 
+    // "Must have prior research experience"), extract them as actionable items so real-world job 
+    // postings are comprehensively audited without relying solely on pre-defined examples!
+    const coveredEvidences = new Set(requirements.map(r => r.evidence));
+    skillEvidences.forEach(ev => coveredEvidences.add(ev));
+    const ACTIONABLE_PATTERN = /\b(must|required|requirement|requirements|seeking|proficien|experience|knowledge|hands-on|submit|provide|available|eligib|minimum|cutoff|skills?|responsibilit|collaborat|build|develop|maintain|design|write|manage|coordinate|fluent|spoken|written|english|hindi|license|two-wheeler|willing|weekend|location|stipend)\b/i;
+
+    const uncapturedActionable = sentences.filter(s => {
+      const trimmed = s.trim();
+      const lowerS = trimmed.toLowerCase();
+      if (trimmed.length < 10 || trimmed.length > 250) return false;
+      if (lowerS.startsWith('about us') || lowerS.startsWith('copyright') || lowerS.startsWith('all rights') || lowerS.startsWith('equal opportunity') || lowerS.startsWith('privacy policy')) return false;
+      if (lowerS.endsWith(':') || lowerS.startsWith('key responsibilities:') || lowerS.startsWith('requirements:') || lowerS.startsWith('tasks:')) return false;
+      if (coveredEvidences.has(trimmed)) return false;
+      return ACTIONABLE_PATTERN.test(lowerS);
+    });
+
+    // Add uncaptured actionable sentences (up to 4 items to keep checklist focused and actionable)
+    uncapturedActionable.slice(0, 4).forEach((sentence, uIdx) => {
+      const lower = sentence.toLowerCase();
+      let cat = "skills";
+      let field = "custom";
+      let label = "Requirement";
+      let effort = "days";
+      let days = 2;
+
+      if (lower.includes('cgpa') || lower.includes('gpa') || lower.includes('percentage') || lower.includes('marks') || lower.includes('degree') || lower.includes('branch')) {
+        cat = "eligibility";
+        field = "academic_criteria";
+        label = "Academic Requirement";
+        effort = "locked";
+        days = null;
+      } else if (lower.includes('submit') || lower.includes('provide') || lower.includes('document') || lower.includes('certificate') || lower.includes('letter')) {
+        cat = "documents";
+        field = "doc_submission";
+        label = "Application Submission";
+        effort = "quick";
+        days = 1;
+      } else if (lower.includes('available') || lower.includes('location') || lower.includes('shift') || lower.includes('hours') || lower.includes('week') || lower.includes('month')) {
+        cat = "logistics";
+        field = "logistics_commitment";
+        label = "Logistics Commitment";
+        effort = "quick";
+        days = 0;
+      } else {
+        const shortText = sentence.length > 65 ? sentence.substring(0, 62) + '...' : sentence;
+        label = `Role Requirement: ${shortText}`;
+        cat = "skills";
+        field = "role_qualification";
+        effort = "days";
+        days = 3;
+      }
+
+      requirements.push({
+        id: generateReqId('supp', uIdx),
+        category: cat,
+        field: field,
+        label: label,
+        rule: "custom",
+        value: true,
+        unit: null,
+        required: true,
+        evidence: sentence,
+        confidence: "medium",
+        effortType: effort,
+        estimatedDays: days,
+        locked: cat === "eligibility",
+        active: true
       });
-
-      const targets = meaningfulLines.length > 0 ? meaningfulLines : sentences;
-      
-      targets.slice(0, 8).forEach((sentence, fIdx) => {
-        const lower = sentence.toLowerCase();
-        let cat = "skills";
-        let field = "qualification";
-        let label = "Candidate Requirement";
-        let effort = "days";
-        let days = 3;
-        let rule = "custom";
-        let val = true;
-
-        if (lower.includes('cgpa') || lower.includes('gpa') || lower.includes('percentage') || lower.includes('marks')) {
-          cat = "eligibility";
-          field = "cgpa";
-          label = "Academic Performance";
-          rule = "min";
-          val = 7.0;
-        } else if (lower.includes('year') || lower.includes('batch') || lower.includes('semester') || lower.includes('degree') || lower.includes('b.tech') || lower.includes('bca') || lower.includes('engineering') || lower.includes('graduate')) {
-          cat = "eligibility";
-          field = "degree";
-          label = "Educational Eligibility";
-          rule = "custom";
-          val = true;
-        } else if (lower.includes('link') || lower.includes('github') || lower.includes('portfolio') || lower.includes('website') || lower.includes('profile')) {
-          cat = "links";
-          field = "links";
-          label = "Proof of Work / Profile Link";
-          rule = "has_any";
-          val = ["portfolio", "github"];
-          effort = "quick";
-          days = 0;
-        } else if (lower.includes('resume') || lower.includes('cv') || lower.includes('document') || lower.includes('marksheet') || lower.includes('certificate')) {
-          cat = "documents";
-          field = "resume";
-          label = "Application Documents";
-          rule = "present";
-          val = true;
-          effort = "quick";
-          days = 1;
-        } else if (lower.includes('duration') || lower.includes('week') || lower.includes('month') || lower.includes('availability') || lower.includes('full-time') || lower.includes('part-time') || lower.includes('internship')) {
-          cat = "logistics";
-          field = "availability";
-          label = "Internship Availability";
-          rule = "min";
-          val = 8;
-          effort = "quick";
-          days = 0;
-        } else {
-          const shortText = sentence.length > 60 ? sentence.substring(0, 57) + '...' : sentence;
-          label = `Requirement: ${shortText}`;
-          cat = "skills";
-          field = "skills";
-          rule = "custom";
-          val = true;
-          effort = "days";
-          days = 3;
-        }
-
-        requirements.push({
-          id: generateReqId('req', fIdx),
-          category: cat,
-          field: field,
-          label: label,
-          rule: rule,
-          value: val,
-          unit: null,
-          required: true,
-          evidence: sentence,
-          confidence: "medium",
-          effortType: effort,
-          estimatedDays: days,
-          locked: cat === "eligibility",
-          active: true
-        });
-      });
-    }
+    });
 
     // Attach detected deadline as property on array for UI convenience
     requirements.detectedDeadline = detectedDeadline;
