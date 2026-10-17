@@ -24,7 +24,12 @@
     "FastAPI", "Spring Boot", "SQL", "PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis",
     "Docker", "Kubernetes", "AWS", "Azure", "GCP", "Git", "GitHub", "Linux", "Figma",
     "GraphQL", "REST API", "Tailwind CSS", "Bootstrap", "Machine Learning", "Data Structures",
-    "Flutter", "Dart", "Swift", "Kotlin", "NLP"
+    "Flutter", "Dart", "Swift", "Kotlin", "NLP",
+    "Algorithms", "Problem Solving", "Web Development", "Frontend", "Backend", "Full Stack",
+    "Communication", "Teamwork", "Analytical Skills", "OOP", "Object Oriented Programming",
+    "Data Science", "Deep Learning", "Computer Vision", "Pandas", "NumPy", "TensorFlow", "PyTorch",
+    "Android", "iOS", "Cloud Computing", "DevOps", "CI/CD", "Testing", "Unit Testing",
+    "Microservices", "RESTful APIs", "UI/UX", "System Design", "Excel"
   ];
 
   /**
@@ -325,12 +330,7 @@
         });
 
         if (detectedSkillsInSentence.length > 0) {
-          const isSkillContext = lower.includes('skill') || lower.includes('know') || lower.includes('require') ||
-                                 lower.includes('experience') || lower.includes('proficien') || lower.includes('stack') ||
-                                 lower.includes('infra') || lower.includes('tech') || lower.includes('tool') ||
-                                 lower.includes('good at') || lower.includes('familiar') ||
-                                 lower.includes('react and javascript') || lower.includes('html, css') ||
-                                 detectedSkillsInSentence.length >= 2 || s.startsWith('-') || s.startsWith('•') || s.startsWith('*');
+          const isSkillContext = !lower.includes('equal opportunity') && !lower.includes('privacy policy');
           if (isSkillContext) {
             detectedSkillsInSentence.forEach(sk => {
               if (!collectedSkills.includes(sk)) {
@@ -657,6 +657,94 @@
       } else {
         requirements.unshift(skillsReq);
       }
+    }
+
+    // --- SMART GENERAL FALLBACK EXTRACTOR ---
+    // If no specific structured criteria were extracted, but the user supplied text,
+    // decompose text sentences or bullet points into active actionable criteria so
+    // the user NEVER receives an empty 0-score verdict!
+    if (requirements.length === 0 && text && text.trim().length > 10) {
+      const meaningfulLines = sentences.filter(s => {
+        const l = s.trim().toLowerCase();
+        return l.length > 15 && !l.startsWith('about us') && !l.startsWith('copyright') && !l.startsWith('all rights');
+      });
+
+      const targets = meaningfulLines.length > 0 ? meaningfulLines : sentences;
+      
+      targets.slice(0, 8).forEach((sentence, fIdx) => {
+        const lower = sentence.toLowerCase();
+        let cat = "skills";
+        let field = "qualification";
+        let label = "Candidate Requirement";
+        let effort = "days";
+        let days = 3;
+        let rule = "custom";
+        let val = true;
+
+        if (lower.includes('cgpa') || lower.includes('gpa') || lower.includes('percentage') || lower.includes('marks')) {
+          cat = "eligibility";
+          field = "cgpa";
+          label = "Academic Performance";
+          rule = "min";
+          val = 7.0;
+        } else if (lower.includes('year') || lower.includes('batch') || lower.includes('semester') || lower.includes('degree') || lower.includes('b.tech') || lower.includes('bca') || lower.includes('engineering') || lower.includes('graduate')) {
+          cat = "eligibility";
+          field = "degree";
+          label = "Educational Eligibility";
+          rule = "custom";
+          val = true;
+        } else if (lower.includes('link') || lower.includes('github') || lower.includes('portfolio') || lower.includes('website') || lower.includes('profile')) {
+          cat = "links";
+          field = "links";
+          label = "Proof of Work / Profile Link";
+          rule = "has_any";
+          val = ["portfolio", "github"];
+          effort = "quick";
+          days = 0;
+        } else if (lower.includes('resume') || lower.includes('cv') || lower.includes('document') || lower.includes('marksheet') || lower.includes('certificate')) {
+          cat = "documents";
+          field = "resume";
+          label = "Application Documents";
+          rule = "present";
+          val = true;
+          effort = "quick";
+          days = 1;
+        } else if (lower.includes('duration') || lower.includes('week') || lower.includes('month') || lower.includes('availability') || lower.includes('full-time') || lower.includes('part-time') || lower.includes('internship')) {
+          cat = "logistics";
+          field = "availability";
+          label = "Internship Availability";
+          rule = "min";
+          val = 8;
+          effort = "quick";
+          days = 0;
+        } else {
+          const shortText = sentence.length > 60 ? sentence.substring(0, 57) + '...' : sentence;
+          label = `Requirement: ${shortText}`;
+          cat = "skills";
+          field = "skills";
+          rule = "custom";
+          val = true;
+          effort = "days";
+          days = 3;
+        }
+
+        requirements.push({
+          id: generateReqId('req', fIdx),
+          category: cat,
+          field: field,
+          label: label,
+          rule: rule,
+          value: val,
+          unit: null,
+          required: true,
+          evidence: sentence,
+          confidence: "medium",
+          effortType: effort,
+          estimatedDays: days,
+          locked: cat === "eligibility",
+          active: true
+        });
+      });
     }
 
     // Attach detected deadline as property on array for UI convenience

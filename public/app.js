@@ -721,7 +721,7 @@
   function analyzeOpportunityText() {
     const text = el.jdInput ? el.jdInput.value.trim() : "";
     if (!text) {
-      alert("Please paste opportunity text or click 'Load Sample'.");
+      loadSampleDemo();
       return;
     }
 
@@ -738,7 +738,7 @@
     }
 
     if (el.simulatorTargetBadge) {
-      el.simulatorTargetBadge.textContent = `⚡ CUSTOM JD SCANNED · ${extracted.length} CRITERIA IDENTIFIED`;
+      el.simulatorTargetBadge.textContent = `⚡ OPPORTUNITY SCANNED · ${extracted.length} CRITERIA IDENTIFIED`;
     }
 
     recalculateAll();
@@ -1053,23 +1053,33 @@
       });
     }
 
-    if (el.btnResetText) el.btnResetText.addEventListener('click', loadSampleDemo);
-    if (el.btnFocusEssential) {
-      el.btnFocusEssential.addEventListener('click', () => {
-        if (!el.jdInput || !el.jdInput.value.trim()) return;
-        if (typeof OK.extract.filterEssentialOpportunityText === 'function') {
-          const filtered = OK.extract.filterEssentialOpportunityText(el.jdInput.value);
-          el.jdInput.value = filtered;
-          analyzeOpportunityText();
+    const btnLoadSampleInline = document.getElementById('btn-load-sample-inline');
+    if (btnLoadSampleInline) {
+      btnLoadSampleInline.addEventListener('click', () => {
+        if (el.jdInput) el.jdInput.value = OK.samples.SAMPLE_OPPORTUNITY_TEXT;
+        if (el.oppDeadline) el.oppDeadline.value = OK.samples.getSampleDeadlineDate();
+        analyzeOpportunityText();
+      });
+    }
+
+    if (el.btnResetText) {
+      el.btnResetText.addEventListener('click', () => {
+        if (el.jdInput) {
+          el.jdInput.value = "";
+          el.jdInput.focus();
+          state.opportunityText = "";
+          state.checklist = [];
+          recalculateAll();
         }
       });
     }
+
     if (el.btnRunCompare) el.btnRunCompare.addEventListener('click', analyzeOpportunityText);
     if (el.btnHeaderPrint) el.btnHeaderPrint.addEventListener('click', () => window.print());
 
     if (el.jdInput) {
       let jdDebounce = null;
-      el.jdInput.addEventListener('input', () => {
+      const triggerAnalyze = () => {
         clearTimeout(jdDebounce);
         jdDebounce = setTimeout(() => {
           if (el.jdInput.value.trim().length > 0) {
@@ -1079,8 +1089,9 @@
             state.checklist = [];
             recalculateAll();
           }
-        }, 300);
-      });
+        }, 150);
+      };
+      ['input', 'change', 'paste', 'keyup'].forEach(evt => el.jdInput.addEventListener(evt, triggerAnalyze));
     }
 
     if (el.btnFocusRunway) {
@@ -1281,10 +1292,26 @@
       state.profile = savedProfile;
       populateFormFromProfile(state.profile);
     } else {
-      // Clean blank state: user can type their own details or click LOAD SAMPLE
+      state.profile = {
+        name: "Aarav S.",
+        year: 2,
+        degree: "B.Tech",
+        branch: "CSE",
+        cgpa: 8.0,
+        skills: ["HTML", "CSS", "JavaScript"],
+        docs: { resume: true, marksheet: true },
+        links: { github: "https://github.com/aarav", portfolio: "" },
+        availabilityWeeks: 8,
+        notes: ""
+      };
       populateFormFromProfile(state.profile);
     }
-    recalculateAll();
+
+    if (el.jdInput && el.jdInput.value.trim().length > 0) {
+      analyzeOpportunityText();
+    } else {
+      recalculateAll();
+    }
   });
 
   // Export methods and state for testing / external control
