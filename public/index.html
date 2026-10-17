@@ -244,18 +244,6 @@
               </div>
             </div>
 
-            <!-- In-Memory PDF Upload Bar -->
-            <div class="bg-paper p-2.5 neo-border flex items-center justify-between gap-2 shadow-hard-sm">
-              <div class="flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[18px]">upload_file</span>
-                <span class="font-mono text-[11px] font-bold">Upload Brochure / JD PDF:</span>
-              </div>
-              <input type="file" id="opp-file-input" accept=".pdf,.docx,.txt" class="hidden">
-              <button type="button" id="btn-upload-opp-file" class="neo-btn bg-white hover:bg-yellow text-ink font-mono text-[11px] font-black px-2 py-1 neo-border">
-                CHOOSE PDF
-              </button>
-            </div>
-            <div id="opp-file-status" class="font-mono text-[11px] font-bold empty:hidden"></div>
 
             <!-- Candidate Snapshot Card with Quick Profile Drawer Trigger -->
             <div class="grid grid-cols-2 gap-2">
@@ -902,23 +890,6 @@
         <span class="font-mono text-[10px] font-black bg-white px-2 py-0.5 neo-border" id="profile-save-indicator">Synced</span>
       </div>
 
-      <!-- In-Memory Resume Upload Bar -->
-      <div class="p-3 bg-white neo-border-thick flex flex-col gap-2 shadow-hard-sm">
-        <div class="flex items-center justify-between">
-          <span class="font-display text-xs uppercase">RESUME AUTO-DECODER (OPTIONAL)</span>
-          <span class="bg-yellow font-mono text-[9px] font-black px-1.5 py-0.5 neo-border uppercase">ZERO DISK RETENTION</span>
-        </div>
-        <p class="font-mono text-[11px] text-ink/70">
-          Upload PDF or DOCX resume to extract suggested skills &amp; education into your profile with full human review:
-        </p>
-        <div class="flex items-center gap-2">
-          <input type="file" id="resume-file-input" accept=".pdf,.docx" class="hidden">
-          <button id="btn-trigger-upload" class="neo-btn bg-mint font-mono text-xs font-black uppercase px-3 py-1.5 neo-border flex items-center gap-1">
-            <span class="material-symbols-outlined text-[16px]">upload</span> CHOOSE RESUME (.PDF / .DOCX)
-          </button>
-          <span id="upload-status-text" class="font-mono text-[11px] font-bold"></span>
-        </div>
-      </div>
 
       <!-- Profile Form -->
       <form id="profile-form" class="flex flex-col gap-4" onsubmit="return false;">
@@ -1080,34 +1051,6 @@
     </div>
   </div>
 
-  <!-- ===================================================================
-       MODAL: RESUME REVIEW SUGGESTIONS
-       =================================================================== -->
-  <div id="modal-resume-review" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-resume-title">
-    <div class="modal-content flex flex-col gap-4">
-      <div class="flex items-center justify-between border-b-2 border-black pb-2">
-        <h3 id="modal-resume-title" class="font-display text-lg uppercase">REVIEW RESUME SUGGESTIONS</h3>
-        <button type="button" class="neo-btn bg-white p-1 text-xs font-mono font-black neo-border" id="btn-close-resume-modal">&times;</button>
-      </div>
-
-      <p class="font-mono text-xs font-bold text-ink/80">
-        Review suggested fields extracted from your resume. Uncheck any item you do not wish to adopt. A resume upload will never silently overwrite confirmed data.
-      </p>
-
-      <div id="resume-suggestions-list" class="flex flex-col gap-2 max-h-60 overflow-y-auto pr-1">
-        <!-- Dynamically populated checkboxes -->
-      </div>
-
-      <div class="flex items-center justify-end gap-2 pt-2 border-t border-black">
-        <button type="button" id="btn-reject-resume" class="neo-btn bg-white font-mono text-xs font-black uppercase px-3 py-1.5 neo-border">
-          DISCARD
-        </button>
-        <button type="button" id="btn-accept-resume" class="neo-btn bg-mint font-mono text-xs font-black uppercase px-4 py-1.5 neo-border">
-          APPLY SUGGESTIONS
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Floating Back to Top Button -->
   <button id="btn-back-to-top" class="neo-btn neo-border shadow-hard items-center justify-center font-display text-lg" aria-label="Back to top" title="Scroll to top">
