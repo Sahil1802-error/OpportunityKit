@@ -228,7 +228,7 @@ function validateProfile(data) {
 /**
  * Serves static frontend files safely with strict whitelisting and path traversal defense.
  */
-function serveStaticFile(req, res, pathname) {
+async function serveStaticFile(req, res, pathname) {
   let decodedPath = '';
   try {
     decodedPath = decodeURIComponent(pathname);
@@ -263,27 +263,25 @@ function serveStaticFile(req, res, pathname) {
     return sendError(res, 403, "Access denied.");
   }
 
-  fs.stat(filePath, (err, stats) => {
-    if (err || !stats.isFile()) {
+  try {
+    const stats = await fs.promises.stat(filePath);
+    if (!stats.isFile()) {
       return sendError(res, 404, `File not found: ${pathname}`);
     }
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    const fileBuffer = await fs.promises.readFile(filePath);
 
-    fs.readFile(filePath, (readErr, fileBuffer) => {
-      if (readErr) {
-        return sendError(res, 500, "Error reading static file.");
-      }
-
-      res.writeHead(200, Object.assign({}, SECURITY_HEADERS, {
-        'Content-Type': contentType,
-        'Content-Length': fileBuffer.length,
-        'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600'
-      }));
-      res.end(fileBuffer);
-    });
-  });
+    res.writeHead(200, Object.assign({}, SECURITY_HEADERS, {
+      'Content-Type': contentType,
+      'Content-Length': fileBuffer.length,
+      'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600'
+    }));
+    res.end(fileBuffer);
+  } catch (readErr) {
+    return sendError(res, 404, `File not found: ${pathname}`);
+  }
 }
 
 /**
@@ -470,7 +468,7 @@ async function handleRequest(req, res) {
 
     // --- STATIC FILES ---
     if (method === 'GET') {
-      return serveStaticFile(req, res, pathname);
+      return await serveStaticFile(req, res, pathname);
     }
 
     // Method not allowed
@@ -560,4 +558,8 @@ if (require.main === module) {
   });
 }
 
-module.exports = { server, handleRequest, PORT };
+module.exports = handleRequest;
+module.exports.default = handleRequest;
+module.exports.handleRequest = handleRequest;
+module.exports.server = server;
+module.exports.PORT = PORT;
